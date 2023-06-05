@@ -1,16 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import {createBrowserRouter, RouterProvider} from 'react-router-dom';
+
+import Home from './components/home/Home';
+import HomePage from './components/home/HomePage';
+import Login from './components/user/Login'
 
 function App() {
+    const route = createBrowserRouter([
+        {
+            path: '',
+            element: <Home />,
+            children: [
+                {
+                    path: '',
+                    element: <HomePage />
+                }
+            ]
+        }, {
+            path: 'login',
+            element: <Login />
+        }
+    ])
     return (
-        <div className="container mx-auto bg-gray-200 rounded-xl shadow border p-8 m-10">
-            <p className="text-3xl text-gray-700 font-bold mb-5">
-                Welcome!
-            </p>
-            <p className="text-gray-500 text-lg">
-                React and Tailwind CSS in action
-            </p>
-        </div>
+        <RouterProvider router={route}></RouterProvider>
     );
 }
 export default App;
