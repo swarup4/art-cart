@@ -1,4 +1,5 @@
 import React from 'react'
+import Products from '../product/Products'
 
 export default function HomePage() {
     return (
@@ -11,6 +12,8 @@ export default function HomePage() {
                     React and Tailwind CSS in action From Home
                 </p>
             </div>
+
+            <Products />
         </>
     )
 }
