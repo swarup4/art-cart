@@ -1,258 +1,153 @@
-import React, { Fragment, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { XMarkIcon } from '@heroicons/react/24/outline'
+    import React, { useState } from 'react'
+    import { XMarkIcon, CheckIcon } from '@heroicons/react/24/outline'
 
 
-const products = [
-    {
-        id: 1,
-        name: 'Throwback Hip Bag',
-        href: '#',
-        color: 'Salmon',
-        price: '$90.00',
-        quantity: 1,
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg',
-        imageAlt: 'Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.',
-    }, {
-        id: 2,
-        name: 'Medium Stuff Satchel',
-        href: '#',
-        color: 'Blue',
-        price: '$32.00',
-        quantity: 1,
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
-        imageAlt:
-            'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
-    }, {
-        id: 3,
-        name: 'Throwback Hip Bag',
-        href: '#',
-        color: 'Salmon',
-        price: '$90.00',
-        quantity: 1,
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg',
-        imageAlt: 'Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.',
+    const products = [
+        {
+            id: 1,
+            name: 'Throwback Hip Bag',
+            href: '#',
+            color: 'Salmon',
+            price: '$90.00',
+            quantity: 1,
+            imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg',
+            imageAlt: 'Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.',
+        }, {
+            id: 2,
+            name: 'Medium Stuff Satchel',
+            href: '#',
+            color: 'Blue',
+            price: '$32.00',
+            quantity: 1,
+            imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
+            imageAlt:
+                'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
+        }, {
+            id: 3,
+            name: 'Throwback Hip Bag',
+            href: '#',
+            color: 'Salmon',
+            price: '$90.00',
+            quantity: 1,
+            imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg',
+            imageAlt: 'Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.',
+        }
+        // More products...
+    ]
+
+    const count = [
+        { id: 1, value: 1 },
+        { id: 2, value: 2 },
+        { id: 3, value: 3 },
+        { id: 4, value: 4 },
+        { id: 5, value: 5 },
+        { id: 6, value: 6 },
+        { id: 7, value: 7 },
+        { id: 8, value: 8 },
+        { id: 9, value: 9 },
+        { id: 10, value: 10 }
+    ]
+
+    function classNames(...classes) {
+        return classes.filter(Boolean).join(' ')
     }
-    // More products...
-]
 
-export default function Cart() {
+    export default function Cart() {
 
-    const [open, setOpen] = useState(true);
+        const [open, setOpen] = useState(true);
+        const [selected, setSelected] = useState(count[0])
 
-    return (
+        return (
 
-        <div>
-            <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
-                    <h1 className="text-4xl font-bold tracking-tight text-gray-900">Shopping Cart</h1>
-
-                </div>
-
-                <section aria-labelledby="products-heading" className="pb-24 pt-6">
-                    <form>
-                        <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
-
-                            <section aria-labelledby="products-heading" className="pb-24 pt-6 lg:col-span-3">
-                                <div className="mt-8">
-                                    <div className="flow-root">
-                                        <ul role="list" className="-my-6 divide-y divide-gray-200">
-                                            {products.map((product) => (
-                                                <li key={product.id} className="flex py-6">
-                                                    <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                                        <img
-                                                            src={product.imageSrc}
-                                                            alt={product.imageAlt}
-                                                            className="h-full w-full object-cover object-center"
-                                                        />
-                                                    </div>
-
-                                                    <div className="ml-4 flex flex-1 flex-col">
-                                                        <div>
-                                                            <div className="flex justify-between text-base font-medium text-gray-900">
-                                                                <h3>
-                                                                    <a href={product.href}>{product.name}</a>
-                                                                </h3>
-                                                                <p className="ml-4">{product.price}</p>
-                                                            </div>
-                                                            <p className="mt-1 text-sm text-gray-500">{product.color}</p>
-                                                            <p className="mt-1 text-sm text-gray-500">{product.price}</p>
-                                                        </div>
-                                                        <div className="flex flex-1 items-end justify-between text-sm">
-                                                            <p className="text-gray-500">Qty {product.quantity}</p>
-
-                                                            <div className="flex">
-                                                                <button
-                                                                    type="button"
-                                                                    className="font-medium text-indigo-600 hover:text-indigo-500"
-                                                                >
-                                                                    Remove
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                </div>
-                            </section>
-
-                            <section className='col-span-2 pt-6'>
-                                <div className='bg-slate-50 p-8 rounded-lg'>
-                                    <h2 className='font-normal text-lg'>Order summary</h2>
-                                    <div className='lf'>
-                                        <div className='text-sm pt-4 mt-4 font-light flex justify-between text-base font-medium text-gray-900'>
-                                            <span>Sub Total</span>
-                                            <span className='font-medium'>$50.00</span>
-                                        </div>
-                                        <div className='text-sm pt-4 mt-4 font-light flex justify-between text-base font-medium text-gray-900 border-t border-gray-200'>
-                                            <span>Shipping estimate</span>
-                                            <span className='font-medium'>$50.00</span>
-                                        </div>
-                                        <div className='text-sm pt-4 mt-4 font-light flex justify-between text-base font-medium text-gray-900 border-t border-gray-200'>
-                                            <span>Tax estimate</span>
-                                            <span className='font-medium'>$50.00</span>
-                                        </div>
-                                        <div className='text-base pt-4 mt-4 font-medium flex justify-between text-base font-medium text-gray-900 border-t border-gray-200'>
-                                            <span>Order total</span>
-                                            <span>$50.00</span>
-                                        </div>
-                                        <div className='mt-6'>
-                                            <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                                                Checkout
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-                        </div>
-                    </form>
-                </section>
-            </main>
-
-            <Transition.Root show={open} as={Fragment}>
-                <Dialog as="div" className="relative z-10" onClose={setOpen}>
-                    <Transition.Child
-                        as={Fragment}
-                        enter="ease-in-out duration-500"
-                        enterFrom="opacity-0"
-                        enterTo="opacity-100"
-                        leave="ease-in-out duration-500"
-                        leaveFrom="opacity-100"
-                        leaveTo="opacity-0"
-                    >
-                        <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
-                    </Transition.Child>
-
-                    <div className="fixed inset-0 overflow-hidden">
-                        <div className="absolute inset-0 overflow-hidden">
-                            <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
-                                <Transition.Child
-                                    as={Fragment}
-                                    enter="transform transition ease-in-out duration-500 sm:duration-700"
-                                    enterFrom="translate-x-full"
-                                    enterTo="translate-x-0"
-                                    leave="transform transition ease-in-out duration-500 sm:duration-700"
-                                    leaveFrom="translate-x-0"
-                                    leaveTo="translate-x-full"
-                                >
-                                    <Dialog.Panel className="pointer-events-auto w-screen max-w-md">
-                                        <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
-                                            <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
-                                                <div className="flex items-start justify-between">
-                                                    <Dialog.Title className="text-lg font-medium text-gray-900">Shopping cart</Dialog.Title>
-                                                    <div className="ml-3 flex h-7 items-center">
-                                                        <button
-                                                            type="button"
-                                                            className="-m-2 p-2 text-gray-400 hover:text-gray-500"
-                                                            onClick={() => setOpen(false)}
-                                                        >
-                                                            <span className="sr-only">Close panel</span>
-                                                            <XMarkIcon className="h-6 w-6" aria-hidden="true" />
-                                                        </button>
-                                                    </div>
-                                                </div>
-
-                                                <div className="mt-8">
-                                                    <div className="flow-root">
-                                                        <ul role="list" className="-my-6 divide-y divide-gray-200">
-                                                            {products.map((product) => (
-                                                                <li key={product.id} className="flex py-6">
-                                                                    <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                                                        <img
-                                                                            src={product.imageSrc}
-                                                                            alt={product.imageAlt}
-                                                                            className="h-full w-full object-cover object-center"
-                                                                        />
-                                                                    </div>
-
-                                                                    <div className="ml-4 flex flex-1 flex-col">
-                                                                        <div>
-                                                                            <div className="flex justify-between text-base font-medium text-gray-900">
-                                                                                <h3>
-                                                                                    <a href={product.href}>{product.name}</a>
-                                                                                </h3>
-                                                                                <p className="ml-4">{product.price}</p>
-                                                                            </div>
-                                                                            <p className="mt-1 text-sm text-gray-500">{product.color}</p>
-                                                                        </div>
-                                                                        <div className="flex flex-1 items-end justify-between text-sm">
-                                                                            <p className="text-gray-500">Qty {product.quantity}</p>
-
-                                                                            <div className="flex">
-                                                                                <button
-                                                                                    type="button"
-                                                                                    className="font-medium text-indigo-600 hover:text-indigo-500"
-                                                                                >
-                                                                                    Remove
-                                                                                </button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                            ))}
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
-                                                <div className="flex justify-between text-base font-medium text-gray-900">
-                                                    <p>Subtotal</p>
-                                                    <p>$262.00</p>
-                                                </div>
-                                                <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
-                                                <div className="mt-6">
-                                                    <a
-                                                        href="#"
-                                                        className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-                                                    >
-                                                        Checkout
-                                                    </a>
-                                                </div>
-                                                <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
-                                                    <p>
-                                                        or
-                                                        <button
-                                                            type="button"
-                                                            className="font-medium text-indigo-600 hover:text-indigo-500"
-                                                            onClick={() => setOpen(false)}
-                                                        >
-                                                            Continue Shopping
-                                                            <span aria-hidden="true"> &rarr;</span>
-                                                        </button>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Dialog.Panel>
-                                </Transition.Child>
-                            </div>
-                        </div>
+            <div>
+                <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                    <div className="flex items-baseline justify-between pb-6 pt-24">
+                        <h1 className="text-4xl font-bold tracking-tight text-gray-900">Shopping Cart</h1>
                     </div>
-                </Dialog>
-            </Transition.Root>
-        </div>
-    )
-}
+
+                    <section aria-labelledby="products-heading" className="pb-24 pt-6">
+                        <form>
+                            <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
+
+                                <section aria-labelledby="products-heading" className="pb-24 lg:col-span-3">
+                                    <div className="mt-8">
+                                        <div className="flow-root">
+                                            <ul role="list" className="-my-6 divide-y divide-gray-200">
+                                                {products.map((product) => (
+                                                    <li key={product.id} className="flex py-10 border-t border-gray-200">
+                                                        <div className="h-48 w-48 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                                            <img src={product.imageSrc} alt={product.imageAlt} className="h-full w-full object-cover object-center" />
+                                                        </div>
+
+                                                        <div className='ml-6 flex flex-1 flex-col justify-between'>
+                                                            <div className="grid grid-cols-2 gap-x-8 gap-y-10">
+                                                                <div>
+                                                                    <div className="flex justify-between text-sm font-normal text-gray-900">
+                                                                        <h3><a href={product.href}>{product.name}</a></h3>
+                                                                    </div>
+                                                                    <p className="mt-1 text-sm text-gray-500">{product.color}</p>
+                                                                    <p className="mt-1 text-sm text-gray-500">{product.price}</p>
+                                                                </div>
+                                                                <div className="flex flex-1 items-start justify-between text-sm">
+                                                                    <p className="text-gray-500">
+                                                                        <select id="country" name="country" autoComplete="country-name"
+                                                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6 w-16"
+                                                                        >
+                                                                            {count.map(x => (
+                                                                                <option key={x.id} value={x.value}>{x.value}</option>
+                                                                            ))}
+                                                                        </select>
+                                                                    </p>
+                                                                    <button type="button" className="-m-2 p-2 text-gray-400 hover:text-gray-500" onClick={() => setOpen(false)} >
+                                                                        <XMarkIcon className="h-4 w-4" aria-hidden="true" />
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+
+                                                            <p className='text-sm flex'>
+                                                                <CheckIcon className="h-5 w-5 text-green-500 font-normal" aria-hidden="true" />
+                                                                <span className='ml-2 font-light'>In stock</span>
+                                                            </p>
+                                                        </div>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <section aria-labelledby="cart-heading" className='col-span-2'>
+                                    <div className='bg-slate-50 p-8 mt-2 rounded-lg'>
+                                        <h2 className='font-normal text-lg'>Order summary</h2>
+                                        <div className='lf'>
+                                            <div className='text-sm pt-4 mt-4 flex justify-between text-base text-gray-900'>
+                                                <span className='font-light'>Sub Total</span>
+                                                <span className='font-medium'>$50.00</span>
+                                            </div>
+                                            <div className='text-sm pt-4 mt-4 flex justify-between text-base text-gray-900 border-t border-gray-200'>
+                                                <span className='font-light'>Shipping estimate</span>
+                                                <span className='font-medium'>$50.00</span>
+                                            </div>
+                                            <div className='text-sm pt-4 mt-4 flex justify-between text-base text-gray-900 border-t border-gray-200'>
+                                                <span className='font-light'>Tax estimate</span>
+                                                <span className='font-medium'>$50.00</span>
+                                            </div>
+                                            <div className='text-base pt-4 mt-4 font-medium flex justify-between text-base text-gray-900 border-t border-gray-200'>
+                                                <span>Order total</span>
+                                                <span>$50.00</span>
+                                            </div>
+                                            <div className='mt-6'>
+                                                <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                                    Checkout
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </form>
+                    </section>
+                </main>
+            </div>
+        )
+    }

@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { Dialog, Disclosure, Popover, Transition } from '@headlessui/react'
-import { ArrowPathIcon, Bars3Icon, ChartPieIcon, CursorArrowRaysIcon, FingerPrintIcon, SquaresPlusIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { ArrowPathIcon, Bars3Icon, ChartPieIcon, CursorArrowRaysIcon, FingerPrintIcon, SquaresPlusIcon, XMarkIcon, ShoppingBagIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid'
 
 
@@ -42,6 +42,9 @@ export default function Header() {
                     </button>
                 </div>
                 <Popover.Group className="hidden lg:flex lg:gap-x-12">
+                    <Link to='/' className="text-sm font-semibold leading-6 text-gray-900">
+                        Home
+                    </Link>
                     <Popover className="relative">
                         <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
                             Product
@@ -96,7 +99,11 @@ export default function Header() {
                         Company
                     </a>
                 </Popover.Group>
-                <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+                <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-5">
+                    <Link to='/cart' className="text-sm font-semibold leading-6 text-gray-900 relative">
+                        <ShoppingBagIcon XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                        <span className='absolute bg-red-500 text-white rounded-lg top-0 w-5 h-5 text-sm text-center -mt-1.5 ml-3.5 font-normal'>10</span>
+                    </Link>
                     <Link to='/login' className="text-sm font-semibold leading-6 text-gray-900">
                         Log in <span aria-hidden="true">&rarr;</span>
                     </Link>
