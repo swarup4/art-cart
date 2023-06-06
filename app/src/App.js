@@ -8,6 +8,7 @@ import Signup from './components/user/Signup';
 import Error from './components/common/Error';
 import ProductDetails from './components/product/ProductDetails';
 import Cart from './components/cart/Cart';
+import OrderList from './components/order/OrderList';
 
 function App() {
     const route = createBrowserRouter([
@@ -25,6 +26,9 @@ function App() {
                 }, {
                     path: 'cart',
                     element: <Cart />
+                }, {
+                    path: 'order',
+                    element: <OrderList />
                 }
             ]
         }, {

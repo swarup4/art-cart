@@ -89,8 +89,8 @@ export default function Header() {
                         </Transition>
                     </Popover>
 
-                    <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-                        Features
+                    <a href="order" className="text-sm font-semibold leading-6 text-gray-900">
+                        Order
                     </a>
                     <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
                         Marketplace
