@@ -43,7 +43,7 @@ const products = [
             email: 'warup.saha004@hotmail.com',
             number: 9035845781
         },
-        status: 2,
+        status: 4,
         deliveryStatus: 'Preparing to ship on March 24, 2021',
         imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg',
         description: 'Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.',
@@ -57,7 +57,7 @@ export default function OrderList() {
         let percent;
         switch (status) {
             case 1:
-                percent = 5
+                percent = 4
                 break;
             case 2:
                 percent = 38
@@ -74,9 +74,9 @@ export default function OrderList() {
 
     function getCompleteStatus(status, statusId) {
         if (status === statusId || status > statusId) {
-            return true
+            return 'text-blue-600'
         } else {
-            return false
+            return ''
         }
     }
 
@@ -131,10 +131,10 @@ export default function OrderList() {
                                                                 <div className="bg-blue-600 h-2 rounded-full" style={{ width: getStatus(product.status) + '%' }}></div>
                                                             </div>
                                                             <div className='grid grid-flow-row-dense grid-cols-4 gap-x-8 mt-6 text-sm text-gray-600'>
-                                                                <p className={`text-left ${getCompleteStatus(product.status, 1) ? 'text-blue-600' : ''}`}>Order placed</p>
-                                                                <p className={`text-center ${getCompleteStatus(product.status, 2) ? 'text-blue-600' : ''}`}>Processing</p>
-                                                                <p className={`text-center ${getCompleteStatus(product.status, 3) ? 'text-blue-600' : ''}`}>Shipped</p>
-                                                                <p className={`text-right ${getCompleteStatus(product.status, 4) ? 'text-blue-600' : ''}`}>Delivered</p>
+                                                                <p className={`text-left ${getCompleteStatus(product.status, 1)}`}>Order placed</p>
+                                                                <p className={`text-center ${getCompleteStatus(product.status, 2)}`}>Processing</p>
+                                                                <p className={`text-center ${getCompleteStatus(product.status, 3)}`}>Shipped</p>
+                                                                <p className={`text-right ${getCompleteStatus(product.status, 4)}`}>Delivered</p>
                                                             </div>
                                                         </div>
                                                     </div>
