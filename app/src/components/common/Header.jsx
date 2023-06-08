@@ -89,7 +89,7 @@ export default function Header() {
                         </Transition>
                     </Popover>
 
-                    <Link to="order" className="text-sm font-semibold leading-6 text-gray-900">
+                    <Link to="user/order" className="text-sm font-semibold leading-6 text-gray-900">
                         Order
                     </Link>
                     <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
@@ -100,7 +100,7 @@ export default function Header() {
                     </a>
                 </Popover.Group>
                 <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-5">
-                    <Link to='/cart' className="text-sm font-semibold leading-6 text-gray-900 relative">
+                    <Link to='user/cart' className="text-sm font-semibold leading-6 text-gray-900 relative">
                         <ShoppingBagIcon XMarkIcon className="h-6 w-6" aria-hidden="true" />
                         <span className='absolute bg-red-500 text-white rounded-lg top-0 w-5 h-5 text-sm text-center -mt-1.5 ml-3.5 font-normal'>10</span>
                     </Link>

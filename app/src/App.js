@@ -1,5 +1,6 @@
 import './App.css';
-import {createBrowserRouter, RouterProvider} from 'react-router-dom';
+import { useState } from 'react';
+import {createBrowserRouter, Navigate, Outlet, RouterProvider} from 'react-router-dom';
 
 import Home from './components/home/Home';
 import HomePage from './components/home/HomePage';
@@ -11,6 +12,9 @@ import Cart from './components/cart/Cart';
 import OrderList from './components/order/OrderList';
 
 function App() {
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
     const route = createBrowserRouter([
         {
             path: '',
@@ -23,12 +27,21 @@ function App() {
                 }, {
                     path: 'product/details',
                     element: <ProductDetails />
+                // }, {
+                //     path: 'order',
+                //     element: isLoggedIn ? <OrderList /> : <Navigate to="/login" />
                 }, {
-                    path: 'cart',
-                    element: <Cart />
-                }, {
-                    path: 'order',
-                    element: <OrderList />
+                    path: 'user',
+                    element: isLoggedIn ? <Outlet /> : <Navigate to="/login" />,
+                    children: [
+                        {
+                            path: 'order',
+                            element: <OrderList />
+                        }, {
+                            path: 'cart',
+                            element: <Cart />
+                        }
+                    ]
                 }
             ]
         }, {
