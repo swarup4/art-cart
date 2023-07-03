@@ -13,7 +13,6 @@ const user = {
     countryCode: Number,
     phone: Number,
     emailVerified: { type: Boolean, default: 0 },
-    phoneVerified: { type: Boolean, default: 0 },
     createdAt: Date,
     updatedAt: Date,
     status: { type: Boolean, default: 1 }
@@ -32,25 +31,11 @@ const userDetails = {
     state: String,
     country: String,
     pinCode: String,
-    // region: String,
-    // timezone: String,
     geoLocation: String,
     createdAt: Date,
     updatedAt: Date
 };
 const userDetailsSchema = new Schema(userDetails, { versionKey: false, timestamps: true });
-
-
-// User Group
-const userGroup = {
-    _id: { type: objectId, auto: true },
-    userId: { type: objectId, required: true },
-    group: String,
-    subGroup: [String],
-    createdAt: Date,
-    updatedAt: Date
-};
-const userGroupSchema = new Schema(userGroup, { versionKey: false, timestamps: true });
 
 
 // User Profile Pics
@@ -67,6 +52,5 @@ const userProfilePicsSchema = new Schema(userProfilePics, { versionKey: false, t
 module.exports = {
     Auth: mongoose.model("user", userSchema),
     Details: mongoose.model("userDetails", userDetailsSchema),
-    Group: mongoose.model("userGroup", userGroupSchema),
     ProfilePics: mongoose.model("userProfilePics", userProfilePicsSchema)
 };

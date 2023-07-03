@@ -374,18 +374,6 @@ router.post("/addUserGroup", userMiddleware.varifyToken, (req, res) => {
     })
 });
 
-// Get Logged in User Group
-router.get("/userGroup/:id", userMiddleware.varifyToken, (req, res) => {
-    let id = req.params.id;
-    User.Group.findOne({ userId: id }, (err, data) => {
-        if (err) {
-            res.send(err);
-        } else {
-            res.send(data);
-        }
-    });
-});
-
 // router.post('/uploadProfilePics/:id', userMiddleware.varifyToken, upload.single("profile"), uploadMiddleware.uploadImage, (req, res) => {
 //     let obj = {
 //         userId: req.params.id,
