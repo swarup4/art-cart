@@ -18,20 +18,25 @@ const storage = multer.memoryStorage()
 const upload = multer({ storage: storage });
 
 // Get All User Information. This is Only for Admin User
-router.get("/info/:id", (req, res) => {
-    const id = req.params.id;
-    User.Auth.findById(id, { password: 0 }, (err, data) => {
-        if (err) {
-            res.send(err);
-        } else {
-            let obj = data;
-            if (data.countryCode != undefined && data.phone != undefined) {
+router.get("/info/:id", async (req, res) => {
+    try {
+        const id = req.params.id;
+        const user = await User.Auth.findById(id, { password: 0 });
+        if (user) {
+            const obj = user;
+            if (user.countryCode != undefined && user.phone != undefined) {
                 obj.countryCode = 91;
-                obj.phone = `+${data.countryCode}-${data.phone}`;
+                obj.phone = `+${user.countryCode}-${user.phone}`;
             }
-            res.send(obj);
+
+            res.json({
+                success: true,
+                data: obj
+            });
         }
-    });
+    } catch (error) {
+        res.send(error);
+    }
 });
 /**
 {
@@ -40,19 +45,19 @@ router.get("/info/:id", (req, res) => {
 }
  */
 router.post("/login", async (req, res) => {
-    let obj = {
-        email: req.body.email,
-        password: req.body.password,
-        status: true
-    };
-
     try {
-        let user = await User.Auth.findOne(obj);
+        const obj = {
+            email: req.body.email,
+            password: req.body.password,
+            status: true
+        };
+
+        const user = await User.Auth.findOne(obj);
         if (user == null) {
             res.status(401).json({ error: "Username & password is not Valid" });
         } else {
-            let obj = { id: user._id, email: user.email };
-            let token = jwt.sign(obj, process.env.SECRATE_KEY, {
+            const obj = { id: user._id, email: user.email };
+            const token = jwt.sign(obj, process.env.SECRATE_KEY, {
                 expiresIn: 1800 // expires in 30 minuit
             });
 
@@ -81,10 +86,10 @@ router.post("/login", async (req, res) => {
  */
 router.post("/signup", userMiddleware.checkExestingUser, async (req, res) => {
     try {
-        let model = new User.Auth(req.body);
-        let user = await model.save();
-        let obj = { id: user._id, email: user.email };
-        let token = jwt.sign(obj, process.env.SECRATE_KEY, {
+        const model = new User.Auth(req.body);
+        const user = await model.save();
+        const obj = { id: user._id, email: user.email };
+        const token = jwt.sign(obj, process.env.SECRATE_KEY, {
             expiresIn: 1800 // expires in 30 minuit
         });
 
@@ -98,70 +103,72 @@ router.post("/signup", userMiddleware.checkExestingUser, async (req, res) => {
     }
 });
 
-router.put("/addUsername/:id", userMiddleware.checkExestingUsername, (req, res) => {
-    let id = req.params.id;
-    User.Auth.findOneAndUpdate({ _id: id }, { username: req.body.username }, {
-        timestamps: { createdAt: false, updatedAt: true }
-    }, (err, data) => {
-        if (err) {
-            res.send(err);
-        } else {
-            res.json(data);
+router.put("/addUsername/:id", userMiddleware.checkExestingUsername, async (req, res) => {
+    try {
+        const id = req.params.id;
+        const user = await User.Auth.findOneAndUpdate({ _id: id }, { username: req.body.username }, {
+            timestamps: { createdAt: false, updatedAt: true }
+        });
+
+        if (user) {
+            res.json({
+                success: true,
+                data: user
+            });
         }
-    });
+    } catch (error) {
+        res.send(error);
+    }
 });
 
-router.put("/addUserInfo/:id", userMiddleware.varifyToken, (req, res) => {
-    let id = req.params.id;
-    User.Auth.findOneAndUpdate({ _id: id }, req.body, {
-        timestamps: { createdAt: false, updatedAt: true }
-    }, (err, data) => {
-        if (err) {
-            res.send(err);
-        } else {
-            res.json(data);
+router.put("/addUserInfo/:id", userMiddleware.varifyToken, async (req, res) => {
+    try {
+        const id = req.params.id;
+        const user = await User.Auth.findOneAndUpdate({ _id: id }, req.body, {
+            timestamps: { createdAt: false, updatedAt: true }
+        });
+
+        if (user) {
+            res.json({
+                success: true,
+                data: user
+            });
         }
-    });
+    } catch (error) {
+        res.send(error);
+    }
 });
 
 //Change Password
-router.post('/changePassword', userMiddleware.varifyToken, (req, res) => {
-    const userId = req.body.id;
-    const password = req.body.password;
-    if (req.body.olDpassword != undefined) {
-        const oldPassword = req.body.olDpassword;
-    }
+router.post('/changePassword', userMiddleware.varifyToken, async (req, res) => {
+    try {
+        const userId = req.body.id;
+        const password = req.body.password;
+        const user = await User.Auth.findById(userId);
 
-    User.Auth.find(userId, (err, user) => {
-        if (err) {
+        if (user.length > 0) {
+            const obj = { _id: userId };
+            const user = await User.Auth.findOneAndUpdate(obj, { password: password }, {
+                timestamps: { createdAt: false, updatedAt: true }
+            });
+
             res.json({
-                error: err,
-                message: "Id is not correct"
+                success: true,
+                data: user
             });
         } else {
-            if (user == null) {
-                res.status(404).send("User id not found");
-            } else {
-                let obj = { _id: userId }
-                User.Auth.findOneAndUpdate(obj, { password: password }, {
-                    timestamps: { createdAt: false, updatedAt: true }
-                }, (err, data) => {
-                    if (err) {
-                        res.send(err);
-                    } else {
-                        res.send("Password updated succesfully");
-                    }
-                });
-            }
+            res.status(404).send("User id not found");
         }
-    });
+    } catch (error) {
+        res.send(error);
+    }
 });
 
 
 // Active Previous Deactivated User. & Deactivate Active User.
 router.put("/activeDeactivateUser/:id", (req, res) => {
-    let id = req.params.id;
-    let status = req.body;
+    const id = req.params.id;
+    const status = req.body;
     User.Auth.findById(id, (err, user) => {
         if (err) {
             res.json({
@@ -281,8 +288,8 @@ router.put("/varification/:type/:id", userMiddleware.varifyToken, (req, res) => 
 // Insert Logged in User Details
 router.post("/insertUserDetails", userMiddleware.varifyToken, async (req, res) => {
     try {
-        let model = new User.Details(req.body);
-        let user = await model.save();
+        const model = new User.Details(req.body);
+        const user = await model.save();
         if (user) {
             res.json({
                 success: true,
@@ -295,30 +302,39 @@ router.post("/insertUserDetails", userMiddleware.varifyToken, async (req, res) =
 });
 
 // Get Logged in User Details
-router.get("/userDetails/:id", userMiddleware.varifyToken, (req, res) => {
-    let id = req.params.id;
-    User.Details.findOne({ userId: id }, (err, data) => {
-        if (err) {
-            res.send(err);
-        } else {
-            res.json(data);
+router.get("/userDetails/:id", userMiddleware.varifyToken, async (req, res) => {
+    try {
+        const id = req.params.id;
+        const user = await User.Details.findOne({ userId: id });
+        if (user) {
+            res.json({
+                success: true,
+                data: user
+            });
         }
-    });
+    } catch (error) {
+        res.send(error);
+    }
 });
 
 // Update User Details
-router.put("/updateUserDetails/:id", userMiddleware.varifyToken, (req, res) => {
-    const id = req.params.id;
-    const obj = req.body;
-    User.Details.findOneAndUpdate({ userId: id }, obj, {
-        timestamps: { createdAt: false, updatedAt: true }
-    }, (err, data) => {
-        if (err) {
-            res.send(err);
-        } else {
-            res.send("Data Updated Successfully");
+router.put("/updateUserDetails/:id", userMiddleware.varifyToken, async (req, res) => {
+    try {
+        const id = req.params.id;
+        const obj = req.body;
+        const user = await User.Details.findOneAndUpdate({ userId: id }, obj, {
+            timestamps: { createdAt: false, updatedAt: true }
+        });
+
+        if (user) {
+            res.json({
+                success: true,
+                message: "Data Updated Successfully"
+            });
         }
-    });
+    } catch (error) {
+        res.send(error);
+    }
 });
 
 

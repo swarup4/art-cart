@@ -4,30 +4,18 @@ const BankDetails = require('./models');
 
 const router = express.Router();
 
-router.get('/company', (req, res) => {
-    BankDetails.find({ bankUserType: 'Company' }, (err, data) => {
-        if (err) {
-            res.send(err.message);
-        } else {
+router.get('/getAllVendors', async (req, res) => {
+    try {
+        const bank = await BankDetails.find({ bankUserType: 'Vendor' });
+        if (bank) {
             res.json({
                 success: true,
-                data: data
+                data: bank
             });
         }
-    });
-});
-
-router.get('/getAllVendors', (req, res) => {
-    BankDetails.find({ bankUserType: 'Vendor' }, (err, data) => {
-        if (err) {
-            res.send(err.message);
-        } else {
-            res.json({
-                success: true,
-                data: data
-            });
-        }
-    });
+    } catch (error) {
+        res.send(error);
+    }
 });
 
 
@@ -51,8 +39,8 @@ router.get('/getAllVendors', (req, res) => {
 */
 router.post('/addBankDetails', async (req, res) => {
     try {
-        let model = new BankDetails(req.body);
-        let bank = await model.save();
+        const model = new BankDetails(req.body);
+        const bank = await model.save();
         if (bank) {
             res.json({
                 success: true,
