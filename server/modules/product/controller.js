@@ -4,7 +4,7 @@ const multer = require('multer');
 const Product = require('./models');
 const productMiddleware = require('../../middleware/product');
 const userMiddleware = require('../../middleware/user');
-const uploadMiddleware = require('../../middleware/uploadImage');
+// const uploadMiddleware = require('../../middleware/uploadImage');
 
 const router = express.Router();
 
@@ -319,7 +319,7 @@ router.put('/updateProductDetails/:id', userMiddleware.varifyToken, (req, res) =
     });
 });
 
-router.post('/addProductImage', userMiddleware.varifyToken, upload.single("product"), uploadMiddleware.uploadProductImage);
+router.post('/addProductImage', userMiddleware.varifyToken, upload.single("product"), productMiddleware.uploadProductImage);
 
 router.post('/uploadProductImage', userMiddleware.varifyToken, (req, res) => {
     let model = new Product.Image(req.body);

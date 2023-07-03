@@ -5,10 +5,10 @@ const multer = require('multer');
 const User = require('./models');
 const config = require('../../helper/config');
 const userMiddleware = require('../../middleware/user');
-const email = require('../../middleware/email');
-const sendSMS = require('../../middleware/sendSMS');
-const phone = require('../../middleware/sendSMS');
-const uploadMiddleware = require('../../middleware/uploadImage');
+// const email = require('../../middleware/email');
+// const sendSMS = require('../../middleware/sendSMS');
+// const phone = require('../../middleware/sendSMS');
+// const uploadMiddleware = require('../../middleware/uploadImage');
 
 const router = express.Router();
 
@@ -86,42 +86,53 @@ router.post("/signup", userMiddleware.checkExestingUser, (req, res) => {
         if (err) {
             res.send(err.message);
         } else {
-            const securityCode = userMiddleware.generateSecurityCode();
-            User.Auth.findOneAndUpdate({ _id: user._id }, { securityCode: securityCode }, {
-                timestamps: { createdAt: false, updatedAt: true }
-            }, (err, data) => {
-                if (err) {
+            User.Auth.findById(user._id, (err, data) => {
+                if(err){
                     res.send(err);
-                } else {
-                    if ('email' in user) {
-                        let obj = { id: data._id, email: data.email };
-                        let token = jwt.sign(obj, config.secrateKey, {
-                            expiresIn: 1800000 // expires in 30 minuit
-                        });
-
-                        let userInfo = {
-                            id: data._id,
-                            email: data.email,
-                            token: token,
-                            securityCode: securityCode
-                        };
-                        const securityCodeText = "Varification Code is " + securityCode;
-                        const securityCodeTemplate = "<h1>Email varification code is " + securityCode + "</h1>";
-                        email(data.email, 'Security Code', securityCodeTemplate, securityCodeText).then(send => {
-                            // res.send(data);
-                            res.json(userInfo);
-                        }, err => {
-                            console.log(err);
-                            res.send(err);
-                        });
-                    } else if ('phone' in user) {
-                        console.log('Phone');
-                        res.json(securityCode);
-                    } else {
-                        res.json(securityCode);
-                    }
                 }
+                let userInfo = {
+                    id: data._id,
+                    email: data.email,
+                    token: token
+                };
+                res.send(userInfo);
             })
+            // const securityCode = userMiddleware.generateSecurityCode();
+            // User.Auth.findOneAndUpdate({ _id: user._id }, { securityCode: securityCode }, {
+            //     timestamps: { createdAt: false, updatedAt: true }
+            // }, (err, data) => {
+            //     if (err) {
+            //         res.send(err);
+            //     } else {
+            //         if ('email' in user) {
+            //             let obj = { id: data._id, email: data.email };
+            //             let token = jwt.sign(obj, config.secrateKey, {
+            //                 expiresIn: 1800000 // expires in 30 minuit
+            //             });
+
+            //             let userInfo = {
+            //                 id: data._id,
+            //                 email: data.email,
+            //                 token: token,
+            //                 securityCode: securityCode
+            //             };
+            //             const securityCodeText = "Varification Code is " + securityCode;
+            //             const securityCodeTemplate = "<h1>Email varification code is " + securityCode + "</h1>";
+            //             email(data.email, 'Security Code', securityCodeTemplate, securityCodeText).then(send => {
+            //                 // res.send(data);
+            //                 res.json(userInfo);
+            //             }, err => {
+            //                 console.log(err);
+            //                 res.send(err);
+            //             });
+            //         } else if ('phone' in user) {
+            //             console.log('Phone');
+            //             res.json(securityCode);
+            //         } else {
+            //             res.json(securityCode);
+            //         }
+            //     }
+            // })
         }
     });
 });
@@ -245,32 +256,32 @@ function getUserId(req, res, next){
 }
 
  
-router.get("/generateVarificationCode/:type/:data", getUserId, userMiddleware.getUserInfo, (req, res) => {
-    const type = req.params.type;      // For Mail & Send Message
-    const id = req.params.id;
-    const securityCode = userMiddleware.generateSecurityCode();
-    const securityCodeText = "Varification Code is " + securityCode;
-    const securityCodeTemplate = "<h1>Email varification code is " + securityCode + "</h1>";
-    User.Auth.findOneAndUpdate({ _id: id }, { securityCode: securityCode }, {
-        timestamps: { createdAt: false, updatedAt: true }
-    }, (err, user) => {
-        if (err) {
-            res.send(err);
-        } else {
-            // For Mail & Send Message
-            if (type == 'email') {
-                email(user.email, 'Security Code', securityCodeTemplate, securityCodeText).then(data => {
-                    res.send(data);
-                }, err => {
-                    console.log(err);
-                    res.send(err);
-                });
-            } else {
-                res.send(securityCode);
-            }
-        }
-    })
-});
+// router.get("/generateVarificationCode/:type/:data", getUserId, userMiddleware.getUserInfo, (req, res) => {
+//     const type = req.params.type;      // For Mail & Send Message
+//     const id = req.params.id;
+//     const securityCode = userMiddleware.generateSecurityCode();
+//     const securityCodeText = "Varification Code is " + securityCode;
+//     const securityCodeTemplate = "<h1>Email varification code is " + securityCode + "</h1>";
+//     User.Auth.findOneAndUpdate({ _id: id }, { securityCode: securityCode }, {
+//         timestamps: { createdAt: false, updatedAt: true }
+//     }, (err, user) => {
+//         if (err) {
+//             res.send(err);
+//         } else {
+//             // For Mail & Send Message
+//             if (type == 'email') {
+//                 email(user.email, 'Security Code', securityCodeTemplate, securityCodeText).then(data => {
+//                     res.send(data);
+//                 }, err => {
+//                     console.log(err);
+//                     res.send(err);
+//                 });
+//             } else {
+//                 res.send(securityCode);
+//             }
+//         }
+//     })
+// });
 
 router.put("/varification/:type/:id", userMiddleware.varifyToken, (req, res) => {
     const obj = {};
@@ -375,19 +386,19 @@ router.get("/userGroup/:id", userMiddleware.varifyToken, (req, res) => {
     });
 });
 
-router.post('/uploadProfilePics/:id', userMiddleware.varifyToken, upload.single("profile"), uploadMiddleware.uploadImage, (req, res) => {
-    let obj = {
-        userId: req.params.id,
-        profilePics: req.file.originalname
-    }
-    let model = new user.ProfilePics(obj);
-    model.save((err, profile) => {
-        if (err) {
-            res.send(err);
-        } else {
-            res.json('Profile picture uploaded successfully');
-        }
-    });
-});
+// router.post('/uploadProfilePics/:id', userMiddleware.varifyToken, upload.single("profile"), uploadMiddleware.uploadImage, (req, res) => {
+//     let obj = {
+//         userId: req.params.id,
+//         profilePics: req.file.originalname
+//     }
+//     let model = new user.ProfilePics(obj);
+//     model.save((err, profile) => {
+//         if (err) {
+//             res.send(err);
+//         } else {
+//             res.json('Profile picture uploaded successfully');
+//         }
+//     });
+// });
 
 module.exports = router;

@@ -6,7 +6,7 @@ const Admin = require('./models');
 const config = require('../../helper/config');
 const email = require('../../middleware/email');
 const userMiddleware = require('../../middleware/user');
-const uploadMiddleware = require('../../middleware/uploadImage');
+// const uploadMiddleware = require('../../middleware/uploadImage');
 
 const router = express.Router();
 
@@ -288,19 +288,19 @@ router.get("/userDetails/:id", (req, res) => {
     });
 });
 
-router.post('/uploadProfilePics/:id', upload.single("profile"), uploadMiddleware.uploadImage, (req, res) => {
-    let obj = {
-        userId: req.body.id,
-        profilePics: req.file.originalname
-    }
-    let model = new Admin.ProfilePics(obj);
-    model.save((err, profile) => {
-        if (err) {
-            res.send(err);
-        } else {
-            res.json('Profile picture uploaded successfully');
-        }
-    });
-});
+// router.post('/uploadProfilePics/:id', upload.single("profile"), uploadMiddleware.uploadImage, (req, res) => {
+//     let obj = {
+//         userId: req.body.id,
+//         profilePics: req.file.originalname
+//     }
+//     let model = new Admin.ProfilePics(obj);
+//     model.save((err, profile) => {
+//         if (err) {
+//             res.send(err);
+//         } else {
+//             res.json('Profile picture uploaded successfully');
+//         }
+//     });
+// });
 
 module.exports = router;
