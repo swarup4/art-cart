@@ -90,15 +90,12 @@ router.post("/login", (req, res) => {
         "phone": 9035845781
  * }
  */
-router.post("/signup", userMiddleware.checkExestingAdmin, (req, res) => {
-    let obj = req.body;
-    let model = new Admin.Auth(obj);
-    // model.password = jwt.sign(obj.password, 'shhhhh');
-    model.save((err, user) => {
-        if (err) {
-            res.send(err.message);
-        } else {
-            // let decoded = jwt.verify(user.password, 'shhhhh');
+router.post("/signup", userMiddleware.checkExestingAdmin, async (req, res) => {
+    try {
+        let model = new Admin.Auth(req.body);
+        let wishlist = await model.save();
+
+        if (wishlist) {
             let obj = { username: user.username, email: user.email, role: user.role };
             let token = jwt.sign(obj, process.env.SECRATE_KEY, {
                 expiresIn: 1800 // expires in 30 minuit
@@ -112,7 +109,9 @@ router.post("/signup", userMiddleware.checkExestingAdmin, (req, res) => {
                 token: token
             });
         }
-    });
+    } catch (error) {
+        res.send(error);
+    }
 });
 
 router.post("/forgotPassword", (req, res) => {
@@ -265,16 +264,19 @@ router.put("/varification/:type/:id", (req, res) => {
  * Insert Admin Details
  *  */
 // Insert Logged in Admin Details
-router.post("/insertUserDetails", (req, res) => {
-    let obj = req.body;
-    let model = new Admin.Details(obj);
-    model.save((err, user) => {
-        if (err) {
-            res.send(err);
-        } else {
-            res.send('Admin data inserted');
+router.post("/insertUserDetails", async (req, res) => {
+    try {
+        let model = new Admin.Details(req.body);
+        let admin = await model.save();
+        if (admin) {
+            res.json({
+                success: true,
+                message: 'Admin details has inserted'
+            });
         }
-    })
+    } catch (error) {
+        res.send(error);
+    }
 });
 
 // Get Logged in Admin Details

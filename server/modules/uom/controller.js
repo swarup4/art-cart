@@ -18,18 +18,19 @@ router.get('/', (req, res) => {
 });
 
 
-router.post('/addUom', (req, res) => {
-    let model = new Uom(req.body);
-    model.save((err, data) => {
-        if (err) {
-            res.send(err.message);
-        } else {
+router.post('/addUom', async (req, res) => {
+    try {
+        let model = new Uom(req.body);
+        let uom = await model.save();
+        if (uom) {
             res.json({
                 success: true,
                 message: 'Uom has addded'
             });
         }
-    });
+    } catch (error) {
+        res.send(error);
+    }
 });
 
 module.exports = router;

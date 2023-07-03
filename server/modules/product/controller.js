@@ -253,7 +253,6 @@ router.post('/addProduct', userMiddleware.varifyToken, async (req, res) => {
         res.json(product);
     } catch (error) {
         res.send(error);
-
     }
 });
 

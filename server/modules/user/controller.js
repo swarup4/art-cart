@@ -25,7 +25,7 @@ router.get("/info/:id", (req, res) => {
             res.send(err);
         } else {
             let obj = data;
-            if(data.countryCode != undefined && data.phone != undefined){
+            if (data.countryCode != undefined && data.phone != undefined) {
                 obj.countryCode = 91;
                 obj.phone = `+${data.countryCode}-${data.phone}`;
             }
@@ -55,7 +55,7 @@ router.post("/login", async (req, res) => {
             let token = jwt.sign(obj, process.env.SECRATE_KEY, {
                 expiresIn: 1800 // expires in 30 minuit
             });
-            
+
             res.json({
                 id: user._id,
                 email: user.email,
@@ -128,7 +128,7 @@ router.put("/addUserInfo/:id", userMiddleware.varifyToken, (req, res) => {
 router.post('/changePassword', userMiddleware.varifyToken, (req, res) => {
     const userId = req.body.id;
     const password = req.body.password;
-    if(req.body.olDpassword != undefined){
+    if (req.body.olDpassword != undefined) {
         const oldPassword = req.body.olDpassword;
     }
 
@@ -199,7 +199,7 @@ router.put("/activeDeactivateUser/:id", (req, res) => {
 /**
  * Varify Phone
  *  */
-function getUserId(req, res, next){
+function getUserId(req, res, next) {
     const type = req.params.type;
     const data = req.params.data;
     User.Auth.findOne({}, (err, user) => {
@@ -216,7 +216,7 @@ function getUserId(req, res, next){
     })
 }
 
- 
+
 // router.get("/generateVarificationCode/:type/:data", getUserId, userMiddleware.getUserInfo, (req, res) => {
 //     const type = req.params.type;      // For Mail & Send Message
 //     const id = req.params.id;
@@ -279,16 +279,19 @@ router.put("/varification/:type/:id", userMiddleware.varifyToken, (req, res) => 
  * Insert User Details
  *  */
 // Insert Logged in User Details
-router.post("/insertUserDetails", userMiddleware.varifyToken, (req, res) => {
-    let obj = req.body;
-    let model = new User.Details(obj);
-    model.save((err, user) => {
-        if (err) {
-            res.send(err);
-        } else {
-            res.send(user);
+router.post("/insertUserDetails", userMiddleware.varifyToken, async (req, res) => {
+    try {
+        let model = new User.Details(req.body);
+        let user = await model.save();
+        if (user) {
+            res.json({
+                success: true,
+                message: 'User details has addded'
+            });
         }
-    })
+    } catch (error) {
+        res.send(error);
+    }
 });
 
 // Get Logged in User Details
@@ -318,22 +321,6 @@ router.put("/updateUserDetails/:id", userMiddleware.varifyToken, (req, res) => {
     });
 });
 
-
-/**
- * Insert User Group
- *  */
-// Insert Logged in User Group
-router.post("/addUserGroup", userMiddleware.varifyToken, (req, res) => {
-    let obj = req.body;
-    let model = new User.Group(obj);
-    model.save((err, user) => {
-        if (err) {
-            res.send(err);
-        } else {
-            res.send('User Group Inserted');
-        }
-    })
-});
 
 // router.post('/uploadProfilePics/:id', userMiddleware.varifyToken, upload.single("profile"), uploadMiddleware.uploadImage, (req, res) => {
 //     let obj = {

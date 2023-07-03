@@ -24,6 +24,4 @@ walletSchema.pre('save', function (next) {
 
 
 
-module.exports = {
-    Wallet: mongoose.model("wallet", walletSchema)
-};
+module.exports = mongoose.model("wallet", walletSchema);

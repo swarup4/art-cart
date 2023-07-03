@@ -49,18 +49,19 @@ router.get('/getAllVendors', (req, res) => {
     "pinCode": 560034,
 }
 */
-router.post('/addBankDetails', (req, res) => {
-    let model = new BankDetails(req.body);
-    model.save((err, bank) => {
-        if (err) {
-            res.send(err.message);
-        } else {
+router.post('/addBankDetails', async (req, res) => {
+    try {
+        let model = new BankDetails(req.body);
+        let bank = await model.save();
+        if (bank) {
             res.json({
                 success: true,
                 message: 'Add Bank Details Data'
             });
         }
-    });
+    } catch (error) {
+        res.send(error);
+    }
 });
 
 module.exports = router;

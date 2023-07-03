@@ -1,21 +1,21 @@
 const express = require('express');
 const ObjectId = require("mongoose").Types.ObjectId;
 
-const wishlist = require('./models');
+const Wishlist = require('./models');
 
 const router = express.Router();
 
 // Get all wishlist Based on User Id
 router.get('/getWishlist/:userId', (req, res) => {
     const userId = req.params.userId;
-    wishlist.aggregate([{
+    Wishlist.aggregate([{
         $lookup: {
             from: 'products',
             localField: 'productId',
             foreignField: '_id',
             as: 'product'
         }
-    }, 
+    },
     { $unwind: '$product' },
     { $unset: 'productId' },
     {
@@ -34,14 +34,14 @@ router.get('/getWishlist/:filter/:userId', (req, res) => {
     const userId = req.params.userId;
     const filter = req.params.filter;
 
-    wishlist.aggregate([{
+    Wishlist.aggregate([{
         $lookup: {
             from: 'products',
             localField: 'productId',
             foreignField: '_id',
             as: 'product'
         }
-    }, 
+    },
     { $unwind: '$product' },
     { $unset: 'productId' },
     {
@@ -62,18 +62,19 @@ router.get('/getWishlist/:filter/:userId', (req, res) => {
     "productId": "609961b081f2da5ce0a67dcf"
 }
 */
-router.post('/addWishlist', (req, res) => {
-    let model = new wishlist(req.body);
-    model.save((err, data) => {
-        if (err) {
-            res.send(err.message);
-        } else {
+router.post('/addWishlist', async (req, res) => {
+    try {
+        let model = new Wishlist(req.body);
+        let wishlist = await model.save();
+        if (wishlist) {
             res.json({
                 success: true,
                 message: 'Product Add into Wishlist Folder'
             });
         }
-    });
+    } catch (error) {
+        res.send(error);
+    }
 });
 
 router.delete('/deleteWishlist/:id', (req, res) => {
