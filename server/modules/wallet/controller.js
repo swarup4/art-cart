@@ -73,23 +73,23 @@ router.post('/withdrowMoney', (req, res) => {
 
 
 // Get all wishlist Based on User Id
-router.get('/getDonateAmount/:productId', (req, res) => {
-    const productId = req.params.productId;
-    Wallets.FundRaise.aggregate([
-        {
-            $match: { productId: ObjectId(productId) }
-        }, {
-            $group: {
-                _id: "$productId",
-                TotalSum: { $sum: "$amount" } 
-            }
-        }
-    ]).then(data => {
-        res.json(data);
-    }).catch(err => {
-        res.send(err);
-    });
-});
+// router.get('/getDonateAmount/:productId', (req, res) => {
+//     const productId = req.params.productId;
+//     Wallets.FundRaise.aggregate([
+//         {
+//             $match: { productId: ObjectId(productId) }
+//         }, {
+//             $group: {
+//                 _id: "$productId",
+//                 TotalSum: { $sum: "$amount" } 
+//             }
+//         }
+//     ]).then(data => {
+//         res.json(data);
+//     }).catch(err => {
+//         res.send(err);
+//     });
+// });
 
 /* 
 {
@@ -98,19 +98,19 @@ router.get('/getDonateAmount/:productId', (req, res) => {
     "amount": 30
 }
 */
-router.post('/donate', (req, res) => {
-    let model = new Wallets.FundRaise(req.body);
-    model.save((err, data) => {
-        if (err) {
-            res.send(err.message);
-        } else {
-            res.json({
-                success: true,
-                message: 'Amount add into Fund Raise'
-            });
-        }
-    });
-});
+// router.post('/donate', (req, res) => {
+//     let model = new Wallets.FundRaise(req.body);
+//     model.save((err, data) => {
+//         if (err) {
+//             res.send(err.message);
+//         } else {
+//             res.json({
+//                 success: true,
+//                 message: 'Amount add into Fund Raise'
+//             });
+//         }
+//     });
+// });
 
 
 // Get all wishlist Based on User Id

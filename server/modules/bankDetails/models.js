@@ -14,7 +14,7 @@ const bankDetails = {
     IFSCCode: { type: String, required: true },
     currency: { type: String, required: true },
     accountType: { type: String, required: true },
-    
+
     city: { type: String, require: true },
     state: { type: String, require: true },
     country: { type: String, require: true },
@@ -25,9 +25,9 @@ const bankDetails = {
 
 const bankDetailsSchema = new Schema(bankDetails, { versionKey: false, timestamps: true });
 
-bankDetailsSchema.pre('save', function(next) {
-	const currentDate = new Date();
-    if (!this.createdDate){
+bankDetailsSchema.pre('save', function (next) {
+    const currentDate = new Date();
+    if (!this.createdDate) {
         this.createdDate = currentDate;
     }
     next();

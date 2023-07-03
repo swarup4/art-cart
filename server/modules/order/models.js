@@ -2,7 +2,6 @@ let mongoose = require("mongoose");
 let Schema = mongoose.Schema;
 let objectId = Schema.ObjectId;
 
-let orders = {};
 let order = {
     _id: { type: objectId, auto: true },
     username: { type: String, required: true },
@@ -14,18 +13,17 @@ let order = {
     paidStatus: { type: Boolean, default: 0 },
     deliveryStatus: { type: Boolean, default: 0 }
 }
-let orderSchema = new Schema(order, { versionKey: false });
+const orderSchema = new Schema(order, { versionKey: false });
 
-orderSchema.pre('save', function(next) {
-	// get the current date
-	let currentDate = new Date();
-	// if created_at doesn't exist, add to that field
-    if (!this.orderTime){
+orderSchema.pre('save', function (next) {
+    // get the current date
+    let currentDate = new Date();
+    // if created_at doesn't exist, add to that field
+    if (!this.orderTime) {
         this.orderTime = currentDate;
     }
     next();
 });
-orders.orderInfo = mongoose.model("order", orderSchema);
 
 let orderDetails = {
     _id: { type: objectId, auto: true },
@@ -38,7 +36,9 @@ let orderDetails = {
     paidStatus: { type: Boolean, default: 0 },
     deliveryStatus: { type: Boolean, default: 0 }
 }
-let orderDetailsSchema = new Schema(orderDetails, { versionKey: false });
-orders.orderDetails = mongoose.model("orderDetails", orderDetailsSchema);
+const orderDetailsSchema = new Schema(orderDetails, { versionKey: false });
 
-module.exports = orders;
+module.exports = {
+    ProductComment: mongoose.model("order", orderSchema),
+    ProductFeedback: mongoose.model("orderDetails", orderDetailsSchema),
+}
