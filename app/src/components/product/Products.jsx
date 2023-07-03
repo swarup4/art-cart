@@ -1,7 +1,8 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/react/20/solid'
+import axios from 'axios';
 
 import ProductList from './ProductList'
 
@@ -65,6 +66,45 @@ function classNames(...classes) {
 export default function Products() {
 
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+    const [product, setProduct] = useState([])
+
+    useEffect(() => {
+        const controller = new AbortController();
+        const signal = controller.signal;
+
+        fetch('localhost:3001/product', { signal })
+            .then(res => res.json())
+            .then(data => {
+                setProduct(data);
+            }).catch(err => {
+                if(err.name == "AbortError"){
+                    console.log("Request Cancel of the API Call");
+                } else{
+                    console.log(err);
+                }
+            })
+        return () => {
+            controller.abort();
+        }
+    }, [])
+
+    useEffect(() => {
+        const cancelToken = axios.CancelToken.source();
+
+        axios.get('localhost:3001/product', { cancelToken: cancelToken.token })
+            .then(res => {
+                setProduct(res.data);
+            }).catch(err => {
+                if(axios.isCancel(err)){
+                    console.log("Request Cancel of the API Call");
+                } else{
+                    console.log(err);
+                }
+            })
+        return () => {
+            cancelToken.cancel();
+        }
+    }, [])
 
     return (
         <div className="bg-white">
