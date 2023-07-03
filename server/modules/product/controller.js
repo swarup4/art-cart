@@ -11,207 +11,216 @@ const router = express.Router();
 const storage = multer.memoryStorage()
 const upload = multer({ storage: storage });
 
-router.get('/getAllProduct', (req, res) => {
-    Product.Category.aggregate([
-        {
-            $lookup: {
-                from: 'feedbacks',
-                localField: '_id',
-                foreignField: 'productId',
-                as: 'feedback'
-            }
-        }, {
-            $lookup: {
-                from: 'users',
-                localField: 'userId',
-                foreignField: '_id',
-                as: 'user'
-            }
-        }, {
-            $lookup: {
-                from: 'users',
-                localField: 'collab',
-                foreignField: '_id',
-                as: 'collab'
-            }
-        }, {
-            $project: {
-                _id: '$_id',
-                userId: '$userId',
-                fname: '$user.fname',
-                lname: '$user.lname',
-                collab: '$collab',
-                productName: '$productName',
-                category: '$category',
-                subCategory: '$subCategory',
-                productType: '$productType',
-                location: '$location',
-                size: '$size',
-                price: '$price',
-                color: '$color',
-                rarity: '$rarity',
-                waysToBuy: '$waysToBuy',
-                buyFrom: '$buyFrom',
-                productImage: '$productImage',
-                createdDate: '$createdDate',
-                status: '$status',
-                feedback: {
-                    $cond: {
-                        if: { $eq: [{ $size: '$feedback' }, 0] },
-                        then: [{}],
-                        else: '$feedback'
-                    }
-                }
-            }
-        },
-        { $unwind: '$feedback' },
-        { $unwind: '$fname' },
-        { $unwind: '$lname' },
-        {
-            $group: {
-                _id: '$_id',
-                userId: { $first: '$userId' },
-                fname: { $first: '$fname' },
-                lname: { $first: '$lname' },
-                collab: { $first: '$collab' },
-                productName: { $first: '$productName' },
-                category: { $first: '$category' },
-                subCategory: { $first: '$subCategory' },
-                productType: { $first: '$productType' },
-                location: { $first: '$location' },
-                size: { $first: '$size' },
-                price: { $first: '$price' },
-                color: { $first: '$color' },
-                rarity: { $first: '$rarity' },
-                waysToBuy: { $first: '$waysToBuy' },
-                buyFrom: { $first: '$buyFrom' },
-                productImage: { $first: '$productImage' },
-                like: {
-                    $sum: { $cond: ['$feedback.like', 1, 0] }
-                },
-                share: {
-                    $sum: { $cond: ['$feedback.share', 1, 0] }
-                },
-                createdDate: {
-                    $first: '$createdDate'
-                },
-                status: {
-                    $first: '$status'
-                }
-            }
-        }, {
-            $unset: ['collab.password', 'collab.emailVerified', 'collab.phoneVerified', 'collab.status', 'collab.role',
-                'collab.email', 'collab.phone', 'collab.countryCode', 'collab.updatedDate', 'collab.createdDate', 'collab.securityCode'
-            ]
-        }
-    ]).then(data => {
-        res.json(data);
-    }).catch(err => {
-        res.json(err);
-    });
+router.get('/getAllProduct', async (req, res) => {
+    // let aggregate = [
+    //     {
+    //         $lookup: {
+    //             from: 'feedbacks',
+    //             localField: '_id',
+    //             foreignField: 'productId',
+    //             as: 'feedback'
+    //         }
+    //     }, {
+    //         $lookup: {
+    //             from: 'users',
+    //             localField: 'userId',
+    //             foreignField: '_id',
+    //             as: 'user'
+    //         }
+    //     }, {
+    //         $lookup: {
+    //             from: 'users',
+    //             localField: 'collab',
+    //             foreignField: '_id',
+    //             as: 'collab'
+    //         }
+    //     }, {
+    //         $project: {
+    //             _id: '$_id',
+    //             userId: '$userId',
+    //             fname: '$user.fname',
+    //             lname: '$user.lname',
+    //             collab: '$collab',
+    //             productName: '$productName',
+    //             category: '$category',
+    //             subCategory: '$subCategory',
+    //             productType: '$productType',
+    //             location: '$location',
+    //             size: '$size',
+    //             price: '$price',
+    //             color: '$color',
+    //             rarity: '$rarity',
+    //             waysToBuy: '$waysToBuy',
+    //             buyFrom: '$buyFrom',
+    //             productImage: '$productImage',
+    //             createdDate: '$createdDate',
+    //             status: '$status',
+    //             feedback: {
+    //                 $cond: {
+    //                     if: { $eq: [{ $size: '$feedback' }, 0] },
+    //                     then: [{}],
+    //                     else: '$feedback'
+    //                 }
+    //             }
+    //         }
+    //     },
+    //     { $unwind: '$feedback' },
+    //     { $unwind: '$fname' },
+    //     { $unwind: '$lname' },
+    //     {
+    //         $group: {
+    //             _id: '$_id',
+    //             userId: { $first: '$userId' },
+    //             fname: { $first: '$fname' },
+    //             lname: { $first: '$lname' },
+    //             collab: { $first: '$collab' },
+    //             productName: { $first: '$productName' },
+    //             category: { $first: '$category' },
+    //             subCategory: { $first: '$subCategory' },
+    //             productType: { $first: '$productType' },
+    //             location: { $first: '$location' },
+    //             size: { $first: '$size' },
+    //             price: { $first: '$price' },
+    //             color: { $first: '$color' },
+    //             rarity: { $first: '$rarity' },
+    //             waysToBuy: { $first: '$waysToBuy' },
+    //             buyFrom: { $first: '$buyFrom' },
+    //             productImage: { $first: '$productImage' },
+    //             like: {
+    //                 $sum: { $cond: ['$feedback.like', 1, 0] }
+    //             },
+    //             share: {
+    //                 $sum: { $cond: ['$feedback.share', 1, 0] }
+    //             },
+    //             createdDate: {
+    //                 $first: '$createdDate'
+    //             },
+    //             status: {
+    //                 $first: '$status'
+    //             }
+    //         }
+    //     }, {
+    //         $unset: ['collab.password', 'collab.emailVerified', 'collab.phoneVerified', 'collab.status', 'collab.role',
+    //             'collab.email', 'collab.phone', 'collab.countryCode', 'collab.updatedDate', 'collab.createdDate', 'collab.securityCode'
+    //         ]
+    //     }
+    // ];
+
+    try {
+        // let product = await Product.Category.aggregate(aggregate);
+        let product = await Product.Category.find();
+        console.log(product.length)
+        res.json(product);
+    } catch (error) {
+        res.send(error);
+    }
 });
 
-router.get('/getProduct', (req, res) => {
-    const filter = req.query;
-    Product.Category.aggregate([
-        {
-            $lookup: {
-                from: 'feedbacks',
-                localField: '_id',
-                foreignField: 'productId',
-                as: 'feedback'
-            }
-        }, {
-            $lookup: {
-                from: 'users',
-                localField: 'userId',
-                foreignField: '_id',
-                as: 'user'
-            }
-        }, {
-            $lookup: {
-                from: 'users',
-                localField: 'collab',
-                foreignField: '_id',
-                as: 'collab'
-            }
-        }, {
-            $project: {
-                _id: '$_id',
-                userId: '$userId',
-                fname: '$user.fname',
-                lname: '$user.lname',
-                collab: '$collab',
-                productName: '$productName',
-                category: '$category',
-                subCategory: '$subCategory',
-                productType: '$productType',
-                location: '$location',
-                size: '$size',
-                price: '$price',
-                color: '$color',
-                rarity: '$rarity',
-                waysToBuy: '$waysToBuy',
-                buyFrom: '$buyFrom',
-                productImage: '$productImage',
-                createdDate: '$createdDate',
-                status: '$status',
-                feedback: {
-                    $cond: {
-                        if: { $eq: [{ $size: '$feedback' }, 0] },
-                        then: [{}],
-                        else: '$feedback'
-                    }
-                }
-            }
-        },
-        { $unwind: '$feedback' },
-        { $unwind: '$fname' },
-        { $unwind: '$lname' },
-        {
-            $group: {
-                _id: '$_id',
-                userId: { $first: '$userId' },
-                fname: { $first: '$fname' },
-                lname: { $first: '$lname' },
-                collab: { $first: '$collab' },
-                productName: { $first: '$productName' },
-                category: { $first: '$category' },
-                subCategory: { $first: '$subCategory' },
-                productType: { $first: '$productType' },
-                location: { $first: '$location' },
-                size: { $first: '$size' },
-                price: { $first: '$price' },
-                color: { $first: '$color' },
-                rarity: { $first: '$rarity' },
-                waysToBuy: { $first: '$waysToBuy' },
-                buyFrom: { $first: '$buyFrom' },
-                productImage: { $first: '$productImage' },
-                like: {
-                    $sum: { $cond: ['$feedback.like', 1, 0] }
-                },
-                share: {
-                    $sum: { $cond: ['$feedback.share', 1, 0] }
-                },
-                createdDate: {
-                    $first: '$createdDate'
-                },
-                status: {
-                    $first: '$status'
-                }
-            }
-        }, {
-            $unset: ['collab.password', 'collab.emailVerified', 'collab.phoneVerified', 'collab.status', 'collab.role',
-                'collab.email', 'collab.phone', 'collab.countryCode', 'collab.updatedDate', 'collab.createdDate', 'collab.securityCode'
-            ]
-        }, {
-            $match: filter
-        }
-    ]).then(data => {
-        res.json(data);
-    }).catch(err => {
-        res.json(err);
-    });
+router.get('/getProduct', async (req, res) => {
+    // let aggregate = [
+    //     {
+    //         $lookup: {
+    //             from: 'feedbacks',
+    //             localField: '_id',
+    //             foreignField: 'productId',
+    //             as: 'feedback'
+    //         }
+    //     }, {
+    //         $lookup: {
+    //             from: 'users',
+    //             localField: 'userId',
+    //             foreignField: '_id',
+    //             as: 'user'
+    //         }
+    //     }, {
+    //         $lookup: {
+    //             from: 'users',
+    //             localField: 'collab',
+    //             foreignField: '_id',
+    //             as: 'collab'
+    //         }
+    //     }, {
+    //         $project: {
+    //             _id: '$_id',
+    //             userId: '$userId',
+    //             fname: '$user.fname',
+    //             lname: '$user.lname',
+    //             collab: '$collab',
+    //             productName: '$productName',
+    //             category: '$category',
+    //             subCategory: '$subCategory',
+    //             productType: '$productType',
+    //             location: '$location',
+    //             size: '$size',
+    //             price: '$price',
+    //             color: '$color',
+    //             rarity: '$rarity',
+    //             waysToBuy: '$waysToBuy',
+    //             buyFrom: '$buyFrom',
+    //             productImage: '$productImage',
+    //             createdDate: '$createdDate',
+    //             status: '$status',
+    //             feedback: {
+    //                 $cond: {
+    //                     if: { $eq: [{ $size: '$feedback' }, 0] },
+    //                     then: [{}],
+    //                     else: '$feedback'
+    //                 }
+    //             }
+    //         }
+    //     },
+    //     { $unwind: '$feedback' },
+    //     { $unwind: '$fname' },
+    //     { $unwind: '$lname' },
+    //     {
+    //         $group: {
+    //             _id: '$_id',
+    //             userId: { $first: '$userId' },
+    //             fname: { $first: '$fname' },
+    //             lname: { $first: '$lname' },
+    //             collab: { $first: '$collab' },
+    //             productName: { $first: '$productName' },
+    //             category: { $first: '$category' },
+    //             subCategory: { $first: '$subCategory' },
+    //             productType: { $first: '$productType' },
+    //             location: { $first: '$location' },
+    //             size: { $first: '$size' },
+    //             price: { $first: '$price' },
+    //             color: { $first: '$color' },
+    //             rarity: { $first: '$rarity' },
+    //             waysToBuy: { $first: '$waysToBuy' },
+    //             buyFrom: { $first: '$buyFrom' },
+    //             productImage: { $first: '$productImage' },
+    //             like: {
+    //                 $sum: { $cond: ['$feedback.like', 1, 0] }
+    //             },
+    //             share: {
+    //                 $sum: { $cond: ['$feedback.share', 1, 0] }
+    //             },
+    //             createdDate: {
+    //                 $first: '$createdDate'
+    //             },
+    //             status: {
+    //                 $first: '$status'
+    //             }
+    //         }
+    //     }, {
+    //         $unset: ['collab.password', 'collab.emailVerified', 'collab.phoneVerified', 'collab.status', 'collab.role',
+    //             'collab.email', 'collab.phone', 'collab.countryCode', 'collab.updatedDate', 'collab.createdDate', 'collab.securityCode'
+    //         ]
+    //     }, {
+    //         $match: filter
+    //     }
+    // ]
+
+    try {
+        const filter = req.query;
+        // let product = await Product.Category.aggregate(aggregate);
+        let product = await Product.Category.find(filter);
+        res.json(product);
+    } catch (error) {
+        res.send(error);
+    }
 });
 
 /* 
@@ -237,15 +246,15 @@ router.get('/getProduct', (req, res) => {
     "buyFrom": "Artists"
 }
 */
-router.post('/addProduct', userMiddleware.varifyToken, (req, res) => {
-    let model = new Product.Category(req.body);
-    model.save((err, data) => {
-        if (err) {
-            res.send(err.message);
-        } else {
-            res.json(data);
-        }
-    });
+router.post('/addProduct', userMiddleware.varifyToken, async (req, res) => {
+    try {
+        let model = new Product.Category(req.body);
+        let product = await model.save();
+        res.json(product);
+    } catch (error) {
+        res.send(error);
+
+    }
 });
 
 router.put('/updateProduct/:id', userMiddleware.varifyToken, (req, res) => {
@@ -293,18 +302,19 @@ router.get('/productDetails/:id', (req, res) => {
     productDescription: "String"
 }
 */
-router.post('/addProductDetails', userMiddleware.varifyToken, (req, res) => {
-    let model = new Product.Details(req.body);
-    model.save((err, data) => {
-        if (err) {
-            res.send(err.message);
-        } else {
+router.post('/addProductDetails', userMiddleware.varifyToken, async (req, res) => {
+    try {
+        let model = new Product.Details(req.body);
+        let product = await model.save();
+        if (product) {
             res.json({
                 success: true,
                 message: 'Product Details Add into database'
             });
         }
-    });
+    } catch (error) {
+        res.send(error);
+    }
 });
 
 router.put('/updateProductDetails/:id', userMiddleware.varifyToken, (req, res) => {
@@ -321,15 +331,19 @@ router.put('/updateProductDetails/:id', userMiddleware.varifyToken, (req, res) =
 
 router.post('/addProductImage', userMiddleware.varifyToken, upload.single("product"), productMiddleware.uploadProductImage);
 
-router.post('/uploadProductImage', userMiddleware.varifyToken, (req, res) => {
-    let model = new Product.Image(req.body);
-    model.save((err, profile) => {
-        if (err) {
-            res.send(err);
-        } else {
-            res.json('Product Images uploaded successfully into Database');
+router.post('/uploadProductImage', userMiddleware.varifyToken, async (req, res) => {
+    try {
+        let model = new Product.Image(req.body);
+        let product = await model.save();
+        if (product) {
+            res.json({
+                success: true,
+                message: 'Product Images uploaded successfully into Database'
+            });
         }
-    });
+    } catch (error) {
+        res.send(error);
+    }
 });
 
 

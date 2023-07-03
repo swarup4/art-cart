@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const jwt = require("jsonwebtoken");
 const multer = require('multer');
@@ -37,34 +39,32 @@ router.get("/info/:id", (req, res) => {
     "password": "Swarup@123"
 }
  */
-router.post("/login", (req, res) => {
+router.post("/login", async (req, res) => {
     let obj = {
         email: req.body.email,
         password: req.body.password,
         status: true
     };
-    // obj.password = jwt.sign(obj.password, 'ssshhhhh');
 
-    User.Auth.findOne(obj, (err, data) => {
-        if (err) {
-            res.send(err);
+    try {
+        let user = await User.Auth.findOne(obj);
+        if (user == null) {
+            res.status(401).json({ error: "Username & password is not Valid" });
         } else {
-            if (data == null) {
-                res.status(401).json({ error: "Username & password is not Valid" });
-            } else {
-                let obj = { id: data._id, email: data.email };
-                let token = jwt.sign(obj, config.secrateKey, {
-                    expiresIn: 1800 // expires in 30 minuit
-                });
-
-                res.json({
-                    id: data._id,
-                    email: data.email,
-                    token: token
-                });
-            }
+            let obj = { id: user._id, email: user.email };
+            let token = jwt.sign(obj, process.env.SECRATE_KEY, {
+                expiresIn: 1800 // expires in 30 minuit
+            });
+            
+            res.json({
+                id: user._id,
+                email: user.email,
+                token: token
+            });
         }
-    });
+    } catch (error) {
+        res.send(error);
+    }
 });
 
 
@@ -79,62 +79,23 @@ router.post("/login", (req, res) => {
         "phone": 9035845781
  * }
  */
-router.post("/signup", userMiddleware.checkExestingUser, (req, res) => {
-    let model = new User.Auth(req.body);
-    // model.password = jwt.sign(obj.password, 'shhhhh');
-    model.save((err, user) => {
-        if (err) {
-            res.send(err.message);
-        } else {
-            User.Auth.findById(user._id, (err, data) => {
-                if(err){
-                    res.send(err);
-                }
-                let userInfo = {
-                    id: data._id,
-                    email: data.email,
-                    token: token
-                };
-                res.send(userInfo);
-            })
-            // const securityCode = userMiddleware.generateSecurityCode();
-            // User.Auth.findOneAndUpdate({ _id: user._id }, { securityCode: securityCode }, {
-            //     timestamps: { createdAt: false, updatedAt: true }
-            // }, (err, data) => {
-            //     if (err) {
-            //         res.send(err);
-            //     } else {
-            //         if ('email' in user) {
-            //             let obj = { id: data._id, email: data.email };
-            //             let token = jwt.sign(obj, config.secrateKey, {
-            //                 expiresIn: 1800000 // expires in 30 minuit
-            //             });
+router.post("/signup", userMiddleware.checkExestingUser, async (req, res) => {
+    try {
+        let model = new User.Auth(req.body);
+        let user = await model.save();
+        let obj = { id: user._id, email: user.email };
+        let token = jwt.sign(obj, process.env.SECRATE_KEY, {
+            expiresIn: 1800 // expires in 30 minuit
+        });
 
-            //             let userInfo = {
-            //                 id: data._id,
-            //                 email: data.email,
-            //                 token: token,
-            //                 securityCode: securityCode
-            //             };
-            //             const securityCodeText = "Varification Code is " + securityCode;
-            //             const securityCodeTemplate = "<h1>Email varification code is " + securityCode + "</h1>";
-            //             email(data.email, 'Security Code', securityCodeTemplate, securityCodeText).then(send => {
-            //                 // res.send(data);
-            //                 res.json(userInfo);
-            //             }, err => {
-            //                 console.log(err);
-            //                 res.send(err);
-            //             });
-            //         } else if ('phone' in user) {
-            //             console.log('Phone');
-            //             res.json(securityCode);
-            //         } else {
-            //             res.json(securityCode);
-            //         }
-            //     }
-            // })
-        }
-    });
+        res.send({
+            id: user._id,
+            email: user.email,
+            token: token
+        });
+    } catch (error) {
+        res.send(error);
+    }
 });
 
 router.put("/addUsername/:id", userMiddleware.checkExestingUsername, (req, res) => {

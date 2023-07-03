@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const jwt = require("jsonwebtoken");
 const multer = require('multer');
@@ -59,7 +60,7 @@ router.post("/login", (req, res) => {
             } else {
                 console.log(data);
                 let obj = { username: data.username, email: data.email, role: data.role };
-                let token = jwt.sign(obj, config.secrateKey, {
+                let token = jwt.sign(obj, process.env.SECRATE_KEY, {
                     expiresIn: 1800 // expires in 30 minuit
                 });
 
@@ -99,7 +100,7 @@ router.post("/signup", userMiddleware.checkExestingAdmin, (req, res) => {
         } else {
             // let decoded = jwt.verify(user.password, 'shhhhh');
             let obj = { username: user.username, email: user.email, role: user.role };
-            let token = jwt.sign(obj, config.secrateKey, {
+            let token = jwt.sign(obj, process.env.SECRATE_KEY, {
                 expiresIn: 1800 // expires in 30 minuit
             });
 

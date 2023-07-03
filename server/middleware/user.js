@@ -1,4 +1,5 @@
-let jwt = require("jsonwebtoken");
+require('dotenv').config();
+const jwt = require("jsonwebtoken");
 
 const config = require('../helper/config');
 const User = require('../modules/user/models');
@@ -32,32 +33,32 @@ let loginObj = {
 
     // Check Username for User is Exist or Not. & Also Check User Status.
     // Params Or Object : Username
-    checkExestingUser: (req, res, next) => {
-        let obj = req.body;
-        let conObj;
-        if ('email' in obj) {
-            conObj = { email: obj.email };
-        }else{
-            conObj = { phone: obj.phone };
-        }
-        User.Auth.findOne(conObj, (err, data) => {
-            if (err) {
-                res.send(err.message);
+    checkExestingUser: async (req, res, next) => {
+        try {
+            let obj = req.body;
+            let conObj;
+            if ('email' in obj) {
+                conObj = { email: obj.email };
             } else {
-                if (data) {
-                    let emailMsg = "", userMsg = "";
-                    if (data.email == obj.email) {
-                        emailMsg = "Email is Already Exist.";
-                    }
-                    if (data.phone == obj.phone) {
-                        userMsg = "Phone is Already Exist.";
-                    }
-                    res.send(emailMsg + " " + userMsg);
-                } else {
-                    next();
-                }
+                conObj = { phone: obj.phone };
             }
-        })
+            let data = await User.Auth.findOne(conObj);
+            if (data) {
+                let emailMsg = "", userMsg = "";
+                if (data.email == obj.email) {
+                    emailMsg = "Email is Already Exist.";
+                }
+                if (data.phone == obj.phone) {
+                    userMsg = "Phone is Already Exist.";
+                }
+                res.send(emailMsg + " " + userMsg);
+            } else {
+                next();
+            }
+        } catch (err) {
+            res.send(err.message);
+        }
+
     },
 
     // Check Username for User is Exist or Not. & Also Check User Status.
@@ -67,7 +68,7 @@ let loginObj = {
         let conObj;
         if ('email' in obj) {
             conObj = { email: obj.email };
-        }else{
+        } else {
             conObj = { phone: obj.phone };
         }
         Admin.Auth.findOne(conObj, (err, data) => {
@@ -111,10 +112,11 @@ let loginObj = {
     varifyToken: (req, res, next) => {
         // var token = req.headers['x-access-token'];
         let token = req.headers.authorization;
+        console.log(token)
         if (!token) {
             res.status(401).send({ auth: false, message: 'No token provided.' })
         } else {
-            jwt.verify(token, config.secrateKey, (err, decoded) => {
+            jwt.verify(token, process.env.SECRATE_KEY, (err, decoded) => {
                 if (err) {
                     res.status(500).json({ auth: false, message: 'Failed to authenticate token.', error: err });
                 } else {

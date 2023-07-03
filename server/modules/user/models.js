@@ -7,7 +7,7 @@ const user = {
     _id: { type: objectId, auto: true },
     fname: String,
     lname: String,
-    username: [String],
+    username: String,
     email: String,
     password: String,
     countryCode: Number,

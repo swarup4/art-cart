@@ -1,5 +1,5 @@
 const config = {
-    secrateKey: 'artcurate',
+    secrateKey: 'artcart',
 
 	emailID: 'artcurate@techtologics.com',
 	emailPassword: 'test12345@#',
