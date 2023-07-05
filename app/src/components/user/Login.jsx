@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useFormik } from 'formik'
 import { object, string, ref } from 'yup'
+import axios from 'axios'
+import { HOST_URL } from '../../constants'
 
 const initialValues = {
     email: '',
@@ -13,22 +15,27 @@ const schema = object({
 })
 
 export default function Login() {
+    const navigate = useNavigate();
 
     const { values, errors, handleBlur, handleChange, handleSubmit, touched } = useFormik({
         initialValues: initialValues,
         validationSchema: schema,
         onSubmit: (values, action) => {
             console.log(values);
+            login(values);
         }
     });
 
-    // function login(data){
-
-    // }
-
-    // const login = useState({
-
-    // })
+    function login(data) {
+        const url = `${HOST_URL}user/login`
+        axios.post(url, data).then(res => {
+            console.log(res.data);
+            sessionStorage.auth = res.data.token;
+            navigate('/user/order');
+        }).catch(err => {
+            console.log(err)
+        })
+    }
 
     return (
         <div className='full-height'>

@@ -1,7 +1,8 @@
 import './App.css';
-import { useState } from 'react';
-import {createBrowserRouter, Navigate, Outlet, RouterProvider} from 'react-router-dom';
+import React from 'react';
+import {createBrowserRouter, Outlet, RouterProvider} from 'react-router-dom';
 
+import ProtectedRoute from './routes/ProtectedRoute';
 import Home from './components/home/Home';
 import HomePage from './components/home/HomePage';
 import Login from './components/user/Login';
@@ -10,10 +11,9 @@ import Error from './components/common/Error';
 import ProductDetails from './components/product/ProductDetails';
 import Cart from './components/cart/Cart';
 import OrderList from './components/order/OrderList';
+// import Demo from './components/Demo';
 
 function App() {
-
-    const [isLoggedIn, setIsLoggedIn] = useState(true);
 
     const route = createBrowserRouter([
         {
@@ -27,12 +27,9 @@ function App() {
                 }, {
                     path: 'product/details',
                     element: <ProductDetails />
-                // }, {
-                //     path: 'order',
-                //     element: isLoggedIn ? <OrderList /> : <Navigate to="/login" />
                 }, {
                     path: 'user',
-                    element: isLoggedIn ? <Outlet /> : <Navigate to="/login" />,
+                    element: <ProtectedRoute><Outlet /></ProtectedRoute>,
                     children: [
                         {
                             path: 'order',
@@ -42,6 +39,15 @@ function App() {
                             element: <Cart />
                         }
                     ]
+                // }, {
+                //     path: 'user',
+                //     element: isLoggedIn ? <Outlet /> : <Navigate to="/login" />,
+                //     children: [
+                //         {
+                //             path: 'order',
+                //             element: <OrderList />
+                //         }
+                //     ]
                 }
             ]
         }, {
@@ -50,6 +56,9 @@ function App() {
         }, {
             path: 'signup',
             element: <Signup />
+        // }, {
+        //     path: 'demo',
+        //     element: <Demo />
         }
     ])
     return (

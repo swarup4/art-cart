@@ -5,8 +5,8 @@ const jwt = require("jsonwebtoken");
 const multer = require('multer');
 
 const User = require('./models');
-const config = require('../../helper/config');
 const userMiddleware = require('../../middleware/user');
+// const config = require('../../helper/config');
 // const email = require('../../middleware/email');
 // const sendSMS = require('../../middleware/sendSMS');
 // const phone = require('../../middleware/sendSMS');
@@ -64,6 +64,7 @@ router.post("/login", async (req, res) => {
             res.json({
                 id: user._id,
                 email: user.email,
+                fname: user.fname,
                 token: token
             });
         }
