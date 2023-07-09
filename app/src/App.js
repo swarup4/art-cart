@@ -11,7 +11,6 @@ import Error from './components/common/Error';
 import ProductDetails from './components/product/ProductDetails';
 import Cart from './components/cart/Cart';
 import OrderList from './components/order/OrderList';
-// import Demo from './components/Demo';
 
 function App() {
 
@@ -56,9 +55,6 @@ function App() {
         }, {
             path: 'signup',
             element: <Signup />
-        // }, {
-        //     path: 'demo',
-        //     element: <Demo />
         }
     ])
     return (

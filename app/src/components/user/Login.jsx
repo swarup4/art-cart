@@ -29,9 +29,10 @@ export default function Login() {
     function login(data) {
         const url = `${HOST_URL}user/login`
         axios.post(url, data).then(res => {
-            console.log(res.data);
+            // console.log(res.data);
             sessionStorage.auth = res.data.token;
-            navigate('/user/order');
+            const location = sessionStorage.url;
+            navigate(location);
         }).catch(err => {
             console.log(err)
         })

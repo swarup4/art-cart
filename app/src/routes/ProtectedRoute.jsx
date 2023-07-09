@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 export default function ProtectedRoute(props) {
     const navigate = useNavigate();
+    const location = useLocation();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     function checkUserToken() {
+        sessionStorage.url = location.pathname;
         const userToken = sessionStorage.getItem('auth');
         if (!userToken || userToken == undefined) {
             setIsLoggedIn(false);
