@@ -7,14 +7,17 @@ const cartSlice = createSlice({
     },
     reducers: {
         addItem: (state, action) => {
-            state.items.push(action.payload)
+            state.items.push(action.payload);
         },
         removeItem: (state, action) => {
-            console.log("Data Remove ", action.payload)
-            state.items.map(x => x.id).indexOf(action.payload)
+            const index = state.items.map(x => x.id).indexOf(action.payload)
+            state.items.splice(index, 1)
+        },
+        clearItem: (state) => {
+            state.items = [];
         }
     }
 });
 
-export const {addItem, removeItem} = cartSlice.actions
+export const {addItem, removeItem, clearItem} = cartSlice.actions
 export default cartSlice.reducer;
