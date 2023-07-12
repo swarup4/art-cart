@@ -1,0 +1,30 @@
+version: '3.3'
+services:
+  app:
+    build:
+      context: './app'
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    container_name: artcart-app
+    networks:
+      - artcart-network
+    volumes:
+      - ./app:/app
+    depends_on:
+      - server
+
+  server:
+    build:
+      context: './server'
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    container_name: artcart-server
+    networks:
+      - artcart-network
+    volumes:
+      - ./server:/server
+
+networks:
+  artcart-network:
