@@ -6,6 +6,7 @@ import { Bars3Icon, MagnifyingGlassIcon, ShoppingBagIcon, XMarkIcon, CursorArrow
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
 import { Navigation, Solutions } from './datatype'
+import { Item } from '../cart/datatype'
 
 
 const navigation: Navigation[] = [
@@ -21,7 +22,7 @@ const solutions: Array<Solutions> = [
     // { name: 'Logout', description: 'Build strategic funnels that will convert', click: 'logout', icon: PowerIcon },
 ];
 
-function classNames(...classes: any[]) {
+function classNames(...classes: Array<string>) {
     return classes.filter(Boolean).join(' ')
 }
 
@@ -31,7 +32,9 @@ export default function Header() {
     const [open, setOpen] = useState<boolean>(false);
     const [user, setUser] = useState<boolean>(false);
 
-    const cartItems = useSelector((store: any) => store.cart.items);
+    const cartItems = useSelector(({ cart }: Item) => {
+        return cart.items
+    });
     const location = useLocation();
 
     useEffect(() => {

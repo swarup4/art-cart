@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { Item } from '../../components/cart/datatype'
 
 const cartSlice: any = createSlice({
     name: 'cart',
@@ -6,12 +7,10 @@ const cartSlice: any = createSlice({
         items: []
     },
     reducers: {
-        addItem: (state: any, action: any) => {
-            debugger;
+        addItem: (state: any, action: { payload: Item }) => {
             state.items.push(action.payload);
         },
-        removeItem: (state: any, action: any) => {
-            debugger;
+        removeItem: (state: any, action: { payload: Item }) => {
             const index = state.items.map((x: any) => x.id).indexOf(action.payload)
             state.items.splice(index, 1)
         },
@@ -21,5 +20,5 @@ const cartSlice: any = createSlice({
     }
 });
 
-export const {addItem, removeItem, clearItem} = cartSlice.actions
+export const { addItem, removeItem, clearItem } = cartSlice.actions
 export default cartSlice.reducer;

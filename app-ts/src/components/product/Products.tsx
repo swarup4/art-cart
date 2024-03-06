@@ -60,7 +60,7 @@ const filters: Filter[] = [
     },
 ]
 
-function classNames(...classes: any) {
+function classNames(...classes: Array<string>) {
     return classes.filter(Boolean).join(' ')
 }
 
