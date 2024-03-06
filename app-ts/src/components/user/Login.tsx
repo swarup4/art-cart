@@ -29,7 +29,7 @@ export default function Login() {
 
     function login(data: Logins) {
         const url: string = `${HOST_URL}user/login`
-        axios.post(url, data).then(({ data }: AxiosResponse<LoginResp>) => {
+        axios.post<LoginResp>(url, data).then(({ data }) => {
             sessionStorage.auth = data.token;
             const location = sessionStorage.url;
             navigate(location);
