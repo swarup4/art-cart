@@ -3,26 +3,22 @@ import { XMarkIcon, CheckIcon, PlusIcon, MinusIcon } from '@heroicons/react/24/o
 import { addItem, removeItem, clearItem } from '../../store/cart/cartSlice'
 import Receipt from './Receipt'
 import { useDispatch, useSelector } from 'react-redux'
+import { Item, Items, ItemsQty } from './datatype'
 
 
 export default function Cart() {
-    debugger;
-    const items = useSelector((store: any) => {
-        debugger;
-        return store.cart.items
-    });
+    const items: Items[] = useSelector(({ cart }: Item) => cart.items);
     const dispatch = useDispatch()
 
-    function filterItems(items: any) {
-        debugger;
-        let cartItems: any[] = [];
+    function filterItems(items: Items[]) {
+        let cartItems: ItemsQty[] = [];
         let price: number = 0;
-        const data = items.reduce((acc: any, elem: any) => {
+        const data = items.reduce((acc: any, elem: Items) => {
             if (acc[elem.id]) {
                 acc[elem.id].quantity += 1;
                 price += acc[elem.id].price;
             } else {
-                let obj: any = { ...elem, quantity: 1 }
+                let obj: ItemsQty = { ...elem, quantity: 1 }
                 acc[elem.id] = obj;
                 price += acc[elem.id].price;
             }
