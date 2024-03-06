@@ -1,0 +1,42 @@
+[{
+  "_id": {
+    "$oid": "6103a026a102a53ef10c3968"
+  },
+  "userId": {
+    "$oid": "610116a43545e6e9f2301f93"
+  },
+  "about": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  "address": "Koramangala, 1st Block",
+  "city": "Bangalore",
+  "state": "Karnataka",
+  "country": "India",
+  "pinCode": "560030",
+  "geoLocation": "https://goo.gl/maps/Tc4QT8Bb1PsqrNJWA",
+  "createdAt": {
+    "$date": "2021-07-30T06:45:58.582Z"
+  },
+  "updatedAt": {
+    "$date": "2021-07-30T06:50:06.866Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "610cbbe73cca451fc8d52195"
+  },
+  "userId": {
+    "$oid": "610cb3645e3b6b4998c6efe4"
+  },
+  "about": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  "address": "HSR, 1st Block",
+  "city": "Bangalore",
+  "state": "Karnataka",
+  "country": "India",
+  "pinCode": "560031",
+  "geoLocation": "https://goo.gl/maps/Tc4QT8Bb1PsqrNJWA",
+  "createdAt": {
+    "$date": "2021-08-06T04:34:47.530Z"
+  },
+  "updatedAt": {
+    "$date": "2021-08-06T04:36:38.276Z"
+  }
+}]

@@ -1,0 +1,149 @@
+[{
+  "_id": {
+    "$oid": "6092754918878b14faf4b363"
+  },
+  "metaData": "None",
+  "tagLine": "None",
+  "companyName": "LTI",
+  "companyWebsite": "https://www.lti.com",
+  "email": "swarup.saha004@hotmail.com",
+  "fax": "swarup123",
+  "awards": "None",
+  "metaTag": "None",
+  "Phone": {
+    "$numberLong": "9035845781"
+  },
+  "vatGst": "None",
+  "certificates": "None",
+  "metaKeyword": "None",
+  "metaDescription": "None",
+  "createdDate": {
+    "$date": "2021-05-05T10:36:57.911Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6092b156edf7b116d9960ef2"
+  },
+  "companyName": "Artcurate",
+  "website": "artcurate.com",
+  "createdDate": {
+    "$date": "2021-05-05T14:53:10.441Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6092b1838227f116e471dd1f"
+  },
+  "tagLine": "artwork",
+  "metaData": "Artcurate Ecommerce",
+  "companyName": "Artcurate",
+  "website": "artcurate.com",
+  "email": "swarup.saha@artcurate.com",
+  "phone": {
+    "$numberLong": "9865321470"
+  },
+  "fax": {
+    "$numberLong": "9865321470"
+  },
+  "gst": "27AASCS2460H1Z0",
+  "award": "best seller",
+  "certificate": "best seller",
+  "metaTag": "Artcurate Ecommerce",
+  "metaKeyword": "Artcurate Ecommerce",
+  "metaDescription": "Artcurate Ecommerce",
+  "logo": "Artcurate.png",
+  "favicon": "favicon.png",
+  "primaryAddress": "#35,Shakuntala Nagar",
+  "primaryCity": "Bangalore",
+  "primaryPinCode": 560025,
+  "primaryCountry": "India",
+  "billingAddress": "#35,Shakuntala Nagar",
+  "billingCity": "Bangalore",
+  "billingPinCode": 560025,
+  "billingCountry": "India",
+  "createdDate": {
+    "$date": "2021-05-05T14:53:55.651Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "60995e9db446e85c12431f43"
+  },
+  "tagLine": "artwork",
+  "metaData": "Artcurate Ecommerce",
+  "status": true,
+  "companyName": "Artcurate",
+  "website": "artcurate.com",
+  "email": "swarup.saha@artcurate.com",
+  "phone": {
+    "$numberLong": "9865321470"
+  },
+  "fax": {
+    "$numberLong": "9865321470"
+  },
+  "gst": "27AASCS2460H1Z0",
+  "award": "best seller",
+  "certificate": "best seller",
+  "metaTag": "Artcurate Ecommerce",
+  "metaKeyword": "Artcurate Ecommerce",
+  "metaDescription": "Artcurate Ecommerce",
+  "logo": "Artcurate.png",
+  "favicon": "favicon.png",
+  "primaryAddress": "#35,Shakuntala Nagar",
+  "primaryCity": "Bangalore",
+  "primaryPinCode": 560025,
+  "primaryCountry": "India",
+  "billingAddress": "#35,Shakuntala Nagar",
+  "billingCity": "Bangalore",
+  "billingPinCode": 560025,
+  "billingCountry": "India",
+  "establishedDate": {
+    "$date": "2021-05-04T18:30:00.000Z"
+  },
+  "createdDate": {
+    "$date": "2021-05-10T16:26:05.608Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "610cbd9b3cca451fc8d52196"
+  },
+  "tagLine": "artwork",
+  "metaData": "Artcurate Ecommerce",
+  "status": true,
+  "companyName": "Artcurate",
+  "website": "artcurate.com",
+  "email": "swarup.saha@artcurate.com",
+  "phone": {
+    "$numberLong": "9865321470"
+  },
+  "fax": {
+    "$numberLong": "9865321470"
+  },
+  "gst": "27AASCS2460H1Z0",
+  "award": "best seller",
+  "certificate": "best seller",
+  "metaTag": "Artcurate Ecommerce",
+  "metaKeyword": "Artcurate Ecommerce",
+  "metaDescription": "Artcurate Ecommerce",
+  "logo": "Artcurate.png",
+  "favicon": "favicon.png",
+  "primaryAddress": "#35,Shakuntala Nagar",
+  "primaryCity": "Bangalore",
+  "primaryPinCode": 560025,
+  "primaryCountry": "India",
+  "billingAddress": "#35,Shakuntala Nagar",
+  "billingCity": "Bangalore",
+  "billingPinCode": 560025,
+  "billingCountry": "India",
+  "establishedDate": {
+    "$date": "2021-05-04T18:30:00.000Z"
+  },
+  "createdAt": {
+    "$date": "2021-08-06T04:42:03.992Z"
+  },
+  "updatedAt": {
+    "$date": "2021-08-06T04:42:03.992Z"
+  }
+}]

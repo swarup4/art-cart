@@ -1,0 +1,41 @@
+[{
+  "_id": {
+    "$oid": "60dc9cad324103f959616513"
+  },
+  "galleryId": {
+    "$oid": "60dc9fc81b24fdd78713cec7"
+  },
+  "userId": {
+    "$oid": "609ab05eabddac700c9e5420"
+  },
+  "createdAt": {
+    "$date": "2021-06-30T16:32:44.851Z"
+  },
+  "fname": "Swarup",
+  "like": true,
+  "lname": "Saha",
+  "share": true,
+  "updatedAt": {
+    "$date": "2021-06-30T16:32:44.851Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "60dca13b324103f9596167ac"
+  },
+  "galleryId": {
+    "$oid": "60dc9fc81b24fdd78713cec7"
+  },
+  "userId": {
+    "$oid": "60af503ffcff67f674aa25eb"
+  },
+  "createdAt": {
+    "$date": "2021-06-30T16:52:11.634Z"
+  },
+  "fname": "Swarup",
+  "like": true,
+  "lname": "Saha",
+  "updatedAt": {
+    "$date": "2021-06-30T16:52:11.634Z"
+  }
+}]

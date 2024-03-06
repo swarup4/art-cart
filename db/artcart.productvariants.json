@@ -1,0 +1,68 @@
+[{
+  "_id": {
+    "$oid": "6115fb6bd4828d19c63d9665"
+  },
+  "fieldName": "ProductVarient",
+  "colors": [
+    {
+      "color": "Green",
+      "code": "#00FF00"
+    },
+    {
+      "color": "Yello",
+      "code": "#FFFF00"
+    },
+    {
+      "color": "White",
+      "code": "#FFFFFF"
+    },
+    {
+      "color": "Black",
+      "code": "#000000"
+    }
+  ],
+  "createdAt": {
+    "$date": "2021-08-13T04:56:11.708Z"
+  },
+  "frame": [
+    "Without Frame",
+    "Wooden",
+    "As per requirement"
+  ],
+  "material": [
+    "Acrylic",
+    "Wood And Canvas"
+  ],
+  "packingType": [
+    "Box",
+    "Parcel"
+  ],
+  "pattern": [
+    "Printed",
+    "Canvas",
+    "Oil Painting"
+  ],
+  "shape": [
+    "Triangle",
+    "Rectangular",
+    "Circle"
+  ],
+  "size": [
+    "Height",
+    "Weidth",
+    "Depth"
+  ],
+  "style": [
+    "Modern",
+    "Hanging",
+    "Tabletop",
+    "Floor"
+  ],
+  "type": [
+    "Handmade",
+    "Images"
+  ],
+  "updatedAt": {
+    "$date": "2021-08-13T05:04:02.539Z"
+  }
+}]

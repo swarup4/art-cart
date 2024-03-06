@@ -1,0 +1,23 @@
+[{
+  "_id": {
+    "$oid": "60b52f2ae0bcd73fed5ff7d3"
+  },
+  "status": true,
+  "productType": "Art",
+  "uom": [
+    {
+      "key": "inch",
+      "value": "Inch"
+    },
+    {
+      "key": "cm",
+      "value": "Cm"
+    }
+  ],
+  "updatedDate": {
+    "$date": "2021-05-31T18:47:06.012Z"
+  },
+  "createdDate": {
+    "$date": "2021-05-31T18:47:06.012Z"
+  }
+}]

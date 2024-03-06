@@ -1,0 +1,83 @@
+[{
+  "_id": {
+    "$oid": "60dca55ea6cc40257ad5c7af"
+  },
+  "image": [
+    "The Abstract Ocean Bubble 1.jpg",
+    "The Abstract Ocean Bubble 2.jpg"
+  ],
+  "status": true,
+  "galleryId": {
+    "$oid": "60dc9fc81b24fdd78713cec7"
+  },
+  "userId": {
+    "$oid": "609ab05eabddac700c9e5420"
+  },
+  "rating": 5,
+  "comment": "This just made our living room fantastic. Goes well with the Hand-Painted Wall Painting.",
+  "fname": "Swarup",
+  "lname": "Saha",
+  "reply": [
+    {
+      "_id": {
+        "$oid": "60dcb6ea4990a04e3a00613b"
+      },
+      "userId": {
+        "$oid": "609ab05eabddac700c9e5420"
+      },
+      "fname": "Swarup",
+      "lname": "Saha",
+      "like": true,
+      "replyDate": {
+        "$date": "2021-06-30T18:24:42.843Z"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2021-06-30T17:09:50.995Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-30T18:24:42.845Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "60dcb399a6cc40257ad5c7b0"
+  },
+  "image": [
+    "The Abstract Ocean Bubble 1.jpg"
+  ],
+  "status": true,
+  "galleryId": {
+    "$oid": "60dc9fc81b24fdd78713cec7"
+  },
+  "userId": {
+    "$oid": "609ab05eabddac700c9e5420"
+  },
+  "rating": 4,
+  "comment": "This just made our living room fantastic.",
+  "fname": "Swarup",
+  "lname": "Saha",
+  "reply": [
+    {
+      "_id": {
+        "$oid": "60dcb7224990a04e3a00613c"
+      },
+      "userId": {
+        "$oid": "609ab05eabddac700c9e5420"
+      },
+      "fname": "Swarup",
+      "lname": "Saha",
+      "like": true,
+      "replyDate": {
+        "$date": "2021-06-30T18:25:38.987Z"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2021-06-30T18:10:33.389Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-30T18:25:38.987Z"
+  }
+}]

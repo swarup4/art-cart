@@ -1,0 +1,25 @@
+[{
+  "_id": {
+    "$oid": "60c1b7cc5116e228054ba954"
+  },
+  "emailVerified": false,
+  "phoneVerified": false,
+  "status": false,
+  "fname": "Swarup",
+  "lname": "Saha",
+  "role": "Admin",
+  "username": "Swarup7",
+  "password": "Swarup@123",
+  "email": "swarup.saha007@hotmail.com",
+  "countryCode": 91,
+  "phone": {
+    "$numberLong": "9035845781"
+  },
+  "org": "Artcurate",
+  "updatedDate": {
+    "$date": "2021-06-10T06:57:16.188Z"
+  },
+  "createdDate": {
+    "$date": "2021-06-10T06:57:16.188Z"
+  }
+}]

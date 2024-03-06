@@ -1,0 +1,25 @@
+[{
+  "_id": {
+    "$oid": "60c21b5d2b7429bc83419a20"
+  },
+  "status": true,
+  "bankUserId": {
+    "$oid": "609ab05eabddac700c9e5420"
+  },
+  "bankUserType": "Vendor",
+  "accountName": "Swarup Saha",
+  "accountNumber": 1002059312,
+  "bankName": "HDFC",
+  "bankCode": 1000004,
+  "branchName": "1st Block, Koramangala",
+  "IFSCCode": "HDFC000004",
+  "currency": "INR",
+  "accountType": "Savings",
+  "city": "Bangalore",
+  "state": "Karnataka",
+  "country": "India",
+  "pinCode": "560034",
+  "createdDate": {
+    "$date": "2021-06-10T14:02:05.019Z"
+  }
+}]

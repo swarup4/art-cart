@@ -1,0 +1,127 @@
+[{
+  "_id": {
+    "$oid": "609961b081f2da5ce0a67dcf"
+  },
+  "collab": [
+    {
+      "$oid": "610116aa3545e6e9f2301f94"
+    },
+    {
+      "$oid": "6103cd810bd9b576df497ed8"
+    }
+  ],
+  "status": true,
+  "userId": {
+    "$oid": "610116a43545e6e9f2301f93"
+  },
+  "productName": "Buddha in Bliss 100% Hand Painted Wall Painting",
+  "category": "Art",
+  "subCategory": "Prints",
+  "productType": "Artwork Posters",
+  "location": "Bangalore",
+  "color": "Multi Color",
+  "rarity": "Open Edition",
+  "waysToBuy": "Bid",
+  "buyFrom": "Individuals",
+  "productImage": "Buddha in Bliss.jpg",
+  "updatedDate": {
+    "$date": "2021-05-10T16:39:12.565Z"
+  },
+  "createdDate": {
+    "$date": "2021-05-10T16:39:12.565Z"
+  },
+  "stock": 3
+},
+{
+  "_id": {
+    "$oid": "609976e781f2da5ce0a67dd2"
+  },
+  "collab": [
+    {
+      "$oid": "6103cd810bd9b576df497ed8"
+    }
+  ],
+  "status": true,
+  "userId": {
+    "$oid": "610116aa3545e6e9f2301f94"
+  },
+  "productName": "The Ocean Bubble 100% Hand Painted Wall Painting (With Outer Floater frame)",
+  "category": "Craft",
+  "subCategory": "Prints",
+  "productType": "Photography",
+  "location": "Bangalore",
+  "color": "Deep Blue",
+  "rarity": "Limited Edition",
+  "waysToBuy": "Buy Now",
+  "buyFrom": "Artists",
+  "productImage": "The Abstract Ocean Bubble.jpg",
+  "updatedDate": {
+    "$date": "2021-05-10T18:09:43.728Z"
+  },
+  "createdDate": {
+    "$date": "2021-05-10T18:09:43.728Z"
+  },
+  "stock": 3
+},
+{
+  "_id": {
+    "$oid": "60aea52d2a0498ec92a49b68"
+  },
+  "collab": [
+    {
+      "$oid": "610116a43545e6e9f2301f93"
+    }
+  ],
+  "status": true,
+  "userId": {
+    "$oid": "610116aa3545e6e9f2301f94"
+  },
+  "productName": "The Abstract Ocean Bubble 100% Hand Painted Wall Painting (With Outer Floater frame)",
+  "category": "Art",
+  "subCategory": "Prints",
+  "productType": "Photography",
+  "location": "Bangalore",
+  "stock": 3,
+  "color": "Deep Blue",
+  "rarity": "Limited Edition",
+  "waysToBuy": "Buy Now",
+  "buyFrom": "Artists",
+  "updatedDate": {
+    "$date": "2021-05-26T19:44:45.798Z"
+  },
+  "createdDate": {
+    "$date": "2021-05-26T19:44:45.798Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "610cc3e6a212218537fbed84"
+  },
+  "userId": {
+    "$oid": "610cb3645e3b6b4998c6efe4"
+  },
+  "creatorName": "Nirajan",
+  "productName": "The Abstract Ocean Bubble 100% Hand Painted Wall Painting (With Outer Floater frame)",
+  "category": "Art",
+  "subCategory": "Prints",
+  "productType": "Photography",
+  "stock": 1,
+  "price": 8999,
+  "discPrice": 8100,
+  "quantity": 1,
+  "shape": "Rectangular",
+  "size": {
+    "height": "40 Inches",
+    "weidth": "52 Inches",
+    "depth": "5 Inches"
+  },
+  "color": "Deep Green",
+  "rarity": "Limited Edition",
+  "status": 1,
+  "createdAt": {
+    "$date": "2021-08-06T05:08:54.318Z"
+  },
+  "updatedAt": {
+    "$date": "2021-08-06T05:08:54.318Z"
+  }
+}]

@@ -1,0 +1,27 @@
+[{
+  "_id": {
+    "$oid": "60dca55ea6cc40257ad5c7af"
+  },
+  "createdAt": {
+    "$date": "2021-06-30T18:23:24.792Z"
+  },
+  "reply": [
+    {
+      "_id": {
+        "$oid": "60dcb69c4a8e4f4a3e69fcdb"
+      },
+      "userId": {
+        "$oid": "609ab05eabddac700c9e5420"
+      },
+      "fname": "Swarup",
+      "lname": "Saha",
+      "like": true,
+      "replyDate": {
+        "$date": "2021-06-30T18:23:24.790Z"
+      }
+    }
+  ],
+  "updatedAt": {
+    "$date": "2021-06-30T18:23:24.792Z"
+  }
+}]

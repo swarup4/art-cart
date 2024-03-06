@@ -1,0 +1,49 @@
+[{
+  "_id": {
+    "$oid": "6099769081f2da5ce0a67dd1"
+  },
+  "productId": {
+    "$oid": "609961b081f2da5ce0a67dcf"
+  },
+  "productDescription": "Made with vibrant and deep colours, this beautiful depiction of Lord Buddha is a lovely piece of wall art to help you decorate your living room and other spaces. It is wall art like this that really adds a lot of character to your beautiful home and helps bring out the best in it. <br />Dekor Company brings to you this beautiful piece of hand painted wall painting perfect for any wall decoration which helps you add the best kind of home decor products to any interior space. All wall painting for decoration are painted by our in house artist and are not prints but actual hand made paintings with original designs made on canvas with highest quality acrylic paint used for great in depth colours. <br />All wall paintings come stretched on a wooden stretcher and with hooks to easily hang them, so you don't have to spend extra money on getting them framed.",
+  "updatedDate": {
+    "$date": "2021-05-10T18:08:16.861Z"
+  },
+  "createdDate": {
+    "$date": "2021-05-10T18:08:16.861Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6099780581f2da5ce0a67dd3"
+  },
+  "productId": {
+    "$oid": "609976e781f2da5ce0a67dd2"
+  },
+  "productDescription": "Abstract Ocean Bubble is a deep blue painting which gives you the feel of diving deep in the ocean. You surely will get lost and wonder if it is a painting or am really underwater. It has a figure of reef in the bottom and the work of lines and bubbles on top resembling exactly like water. Flaunt it in your living space and amaze the spectators. <br/>The shape of this painting makes it ideal to cover a long wall behind a sofa or above a console. <br/>Dekor Company brings to you this beautiful piece of hand painted wall painting perfect for any wall decoration which helps you add the best kind of home decor products to any interior space. All wall painting for decoration are painted by our in house artist and are not prints but actual hand made paintings with original designs made on canvas with highest quality acrylic paint used for great in depth colours. <br />All wall paintings come stretched on a wooden stretcher and with hooks to easily hang them, so you don't have to spend extra money on getting them framed.",
+  "updatedDate": {
+    "$date": "2021-05-10T18:14:29.846Z"
+  },
+  "createdDate": {
+    "$date": "2021-05-10T18:14:29.846Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "60aea52d2a0498ec92a49b69"
+  },
+  "productId": {
+    "$oid": "60aea52d2a0498ec92a49b68"
+  },
+  "productDescription": "Painting",
+  "packageType": "Carton",
+  "location": "Thimpu",
+  "originCountry": "Bhutan",
+  "shipingCountry": "India",
+  "updatedDate": {
+    "$date": "2021-05-26T19:44:45.807Z"
+  },
+  "createdDate": {
+    "$date": "2021-05-26T19:44:45.807Z"
+  }
+}]

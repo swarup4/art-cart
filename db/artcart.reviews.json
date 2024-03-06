@@ -1,0 +1,115 @@
+[{
+  "_id": {
+    "$oid": "60cce91b2276239ff9850d01"
+  },
+  "image": [
+    "The Abstract Ocean Bubble 1.jpg",
+    "The Abstract Ocean Bubble 2.jpg"
+  ],
+  "status": true,
+  "productId": {
+    "$oid": "609976e781f2da5ce0a67dd3"
+  },
+  "userId": {
+    "$oid": "609976e781f2da5ce0a67dd2"
+  },
+  "role": "Artist",
+  "rating": 5,
+  "comment": "This just made our living room fantastic. Goes well with the Hand-Painted Wall Painting.",
+  "fname": "Swarup",
+  "lname": "Saha",
+  "reviewDate": {
+    "$date": "2021-06-18T18:42:35.066Z"
+  },
+  "reply": [
+    {
+      "_id": {
+        "$oid": "60d03e7d98af5981e48a05e7"
+      },
+      "userId": {
+        "$oid": "60af503ffcff67f674aa25eb"
+      },
+      "fname": "Swarup",
+      "lname": "Saha",
+      "reviewerEmail": "swarup.saha004@hotmail.com",
+      "comment": "Thank You so much for the review",
+      "like": true,
+      "replyDate": {
+        "$date": "2021-06-21T07:23:41.186Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "60d03f8898af5981e48a05e8"
+      },
+      "userId": {
+        "$oid": "60af503ffcff67f674aa25eb"
+      },
+      "fname": "Raj",
+      "lname": "Sharma",
+      "reviewerEmail": "raj.sharma@techtologics.com",
+      "comment": "You welcome",
+      "like": false,
+      "replyDate": {
+        "$date": "2021-06-21T07:28:08.487Z"
+      }
+    },
+    {
+      "_id": {
+        "$oid": "60d040c998af5981e48a05e9"
+      },
+      "userId": {
+        "$oid": "60af503ffcff67f674aa25eb"
+      },
+      "fname": "Swarup",
+      "lname": "Saha",
+      "reviewerEmail": "swarup.saha@techtologics.com",
+      "like": true,
+      "replyDate": {
+        "$date": "2021-06-21T07:33:29.092Z"
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "60d0d04f3f385fc14093c5ba"
+  },
+  "image": [
+    "The Abstract Ocean Bubble 1.jpg",
+    "The Abstract Ocean Bubble 2.jpg"
+  ],
+  "status": true,
+  "productId": {
+    "$oid": "609976e781f2da5ce0a67dd2"
+  },
+  "userId": {
+    "$oid": "60af503ffcff67f674aa25eb"
+  },
+  "role": "Artist",
+  "rating": 5,
+  "comment": "This just made our living room fantastic. Goes well with the Hand-Painted Wall Painting.",
+  "fname": "Raj",
+  "lname": "Sharma",
+  "reply": [
+    {
+      "_id": {
+        "$oid": "60d0d6183f385fc14093c5bc"
+      },
+      "userId": {
+        "$oid": "609976e781f2da5ce0a67dd2"
+      },
+      "fname": "Swarup",
+      "lname": "Saha",
+      "reviewerEmail": "swarup.saha004@hotmail.com",
+      "comment": "Thank You so much for the review",
+      "like": true,
+      "replyDate": {
+        "$date": "2021-06-21T18:10:32.421Z"
+      }
+    }
+  ],
+  "reviewDate": {
+    "$date": "2021-06-21T17:45:51.198Z"
+  }
+}]

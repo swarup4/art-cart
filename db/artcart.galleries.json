@@ -1,0 +1,35 @@
+[{
+  "_id": {
+    "$oid": "60dc5c82a3216b5381a5ec36"
+  },
+  "collab": [
+    {
+      "$oid": "60af43eb7babcbf4d63418a2"
+    },
+    {
+      "$oid": "609ab05eabddac700c9e5420"
+    }
+  ],
+  "openDay": [
+    "Monday",
+    "Wednessday",
+    "Friday"
+  ],
+  "status": true,
+  "ownerId": {
+    "$oid": "609ab05eabddac700c9e5420"
+  },
+  "galleryName": "Atta Galatta",
+  "bookingStartTime": "Invalid Date",
+  "bookingEndTime": "Invalid Date",
+  "price": 5000,
+  "duration": "Hours",
+  "location": "134, 17th H Main Rd, KHB Colony, 5th Block, Koramangala, Bengaluru, Karnataka 560095",
+  "locationUrl": "https://goo.gl/maps/ESE4Cz7i3anEvEZ2A",
+  "createdAt": {
+    "$date": "2021-06-30T11:58:58.526Z"
+  },
+  "updatedAt": {
+    "$date": "2021-06-30T11:58:58.526Z"
+  }
+}]

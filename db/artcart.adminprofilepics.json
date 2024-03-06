@@ -1,0 +1,15 @@
+[{
+  "_id": {
+    "$oid": "60b7a02a74d2ab660428e6a5"
+  },
+  "userId": {
+    "$oid": "609ab05eabddac700c9e5420"
+  },
+  "profilePics": "Photo 14-08-17, 6 49 28 PM.jpg",
+  "updatedDate": {
+    "$date": "2021-06-02T15:13:46.582Z"
+  },
+  "createdDate": {
+    "$date": "2021-06-02T15:13:46.582Z"
+  }
+}]

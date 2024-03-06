@@ -1,0 +1,122 @@
+[{
+  "_id": {
+    "$oid": "610116a43545e6e9f2301f93"
+  },
+  "seconderyRole": [],
+  "username": [],
+  "emailVerified": false,
+  "phoneVerified": false,
+  "status": true,
+  "email": "swarup.saha004@hotmail.com",
+  "password": "Swarup@123",
+  "createdAt": {
+    "$date": "2021-07-28T08:34:44.926Z"
+  },
+  "updatedAt": {
+    "$date": "2021-07-28T08:34:45.081Z"
+  },
+  "securityCode": 3908,
+  "fname": "Swarup",
+  "lname": "Saha",
+  "phone": {
+    "$numberLong": "9035845781"
+  },
+  "countryCode": 91
+},
+{
+  "_id": {
+    "$oid": "610116aa3545e6e9f2301f94"
+  },
+  "seconderyRole": [
+    "Painter",
+    "Photographer",
+    "Guitarist"
+  ],
+  "username": [],
+  "emailVerified": true,
+  "phoneVerified": true,
+  "status": true,
+  "email": "sourav.laik007@gmail.com",
+  "password": "Sourav@001",
+  "createdAt": {
+    "$date": "2021-07-28T08:34:50.022Z"
+  },
+  "updatedAt": {
+    "$date": "2021-08-02T07:58:21.636Z"
+  },
+  "securityCode": 8203,
+  "primaryRole": "Artisian",
+  "role": "Artist",
+  "fname": "Sourav",
+  "lname": "Laik"
+},
+{
+  "_id": {
+    "$oid": "6103cd810bd9b576df497ed8"
+  },
+  "seconderyRole": [],
+  "username": [],
+  "emailVerified": false,
+  "phoneVerified": false,
+  "status": true,
+  "email": "gauravgopi9@gmail.com",
+  "password": "Gaurav@123",
+  "createdAt": {
+    "$date": "2021-07-30T09:59:29.717Z"
+  },
+  "updatedAt": {
+    "$date": "2021-08-06T04:32:01.710Z"
+  },
+  "securityCode": 9571,
+  "fname": "Gopi",
+  "lname": "Gaurav"
+},
+{
+  "_id": {
+    "$oid": "610ac349bb6e499824f0003c"
+  },
+  "seconderyRole": [],
+  "username": [],
+  "emailVerified": false,
+  "phoneVerified": false,
+  "status": true,
+  "email": "rik.ghosh001@yahoo.com",
+  "password": "Rik@123",
+  "createdAt": {
+    "$date": "2021-07-28T08:34:44.926Z"
+  },
+  "updatedAt": {
+    "$date": "2021-07-28T08:34:45.081Z"
+  },
+  "securityCode": 3908,
+  "fname": "Rik",
+  "lname": "Ghosh"
+},
+{
+  "_id": {
+    "$oid": "610cb3645e3b6b4998c6efe4"
+  },
+  "seconderyRole": [
+    "Painter",
+    "Photographer"
+  ],
+  "username": [
+    "Kiran123"
+  ],
+  "emailVerified": false,
+  "phoneVerified": false,
+  "status": true,
+  "email": "kiranss.vision@gmail.com",
+  "password": "Kiran@123",
+  "createdAt": {
+    "$date": "2021-08-06T03:58:28.072Z"
+  },
+  "updatedAt": {
+    "$date": "2021-08-06T04:30:55.068Z"
+  },
+  "securityCode": 6372,
+  "fname": "Kiran",
+  "lname": "SS",
+  "primaryRole": "Artisian",
+  "role": "Artist"
+}]

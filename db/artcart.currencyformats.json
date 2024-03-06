@@ -1,0 +1,15 @@
+[{
+  "_id": {
+    "$oid": "6092cb72d14ac71c272fe530"
+  },
+  "status": true,
+  "currencyCode": "INR",
+  "format": "INR 00.00",
+  "createdBy": "superadmin",
+  "updatedDate": {
+    "$date": "2021-05-05T16:44:34.456Z"
+  },
+  "createdDate": {
+    "$date": "2021-05-05T16:44:34.456Z"
+  }
+}]
